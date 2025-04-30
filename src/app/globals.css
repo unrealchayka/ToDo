@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --dark: #111;
+  --light: #cacaca;
+  --color-1: #f8f9fa;
+  --color-2: #e9ecef;
+  --color-3: #dee2e6;
+  --color-4: #ced4da;
+  --color-5: #adb5bd;
+  --color-6: #6c757d;
+  --color-7: #495057;
+  --color-8: #343a40;
+  --color-9: #212529;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.active-gradient{
+  background: linear-gradient(90deg, #4cc9f0, #4895ef, #4361ee, #3f37c9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: blue;
+}
+
+.box-3d-inset-shadow{
+  box-shadow: 
+    inset 1px 1px 3px  rgba(0, 0, 0, 0.3),
+    -3px -4px 3px  rgba(0, 0, 0, 0.3),
+    3px 4px 3px  rgba(255, 255, 255, 1),
+    inset -1px -1px 5px  rgba(255, 255, 255, 1);
+}
+
+.box-3d-shadow{
+  box-shadow: 
+    5px 5px 3px  rgba(0, 0, 0, 0.4),
+    inset -2px -2px 3px  rgba(0, 0, 0, 0.4),
+    inset 2px 2px 3px  #171717,
+    -2px -2px 5px  #171717;
+}
+
+
+.border-hover{
+  border: 6px solid #151515;
+  transition: all .5s linear;
+}
+
+.border-hover:hover{
+  border-color: #222;
+
 }
