@@ -37,7 +37,7 @@ export default function RootLayout({
           className="absolute top-5 left-5" 
           alt='NOTE'
           />
-        <div className="flex container flex-col justify-center items-center h-screen  gap-10 p-10">
+        <div className="flex container gap-3 p-3 flex-col justify-center items-center h-screen 3xl:gap-10 3xl:p-10">
           <Header/>
           <Main/>
         </div>
