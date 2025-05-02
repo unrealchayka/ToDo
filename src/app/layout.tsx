@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import { Header } from "./components/header";
-import Image from "next/image";
 
 import "./globals.css";
 import { Main } from "./components/main";
@@ -31,12 +30,7 @@ export default function RootLayout({
         className={`${quicksand.variable} ${quicksand.variable} relative bg-[#111] flex items-center justify-center`} 
         style={{fontFamily: 'var(--font-quicksand)'}}
       >
-        <Image 
-          src='svg/note.svg' 
-          width={120} height={0}
-          className="absolute top-5 left-5" 
-          alt='NOTE'
-          />
+        
         <div className="flex container gap-3 p-3 flex-col justify-center items-center h-screen 3xl:gap-10 3xl:p-10">
           <Header/>
           <Main/>

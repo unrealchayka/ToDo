@@ -1,12 +1,8 @@
 import React from 'react'
 
-interface Props {
-    className?: string
-}
-
-export const Header: React.FC<Props> = ({ className }) => {
+export const Header = () => {
   return (
-    <div className='flex justify-between items-center w-full box-3d-shadow font-[600] bg-[var(--dark)] text-[var(--light)] px-10 py-3 rounded-2xl'>
+    <div className='flex justify-between text-[var(--color-1)] items-center w-full box-3d-shadow font-[600] px-10 py-3 rounded-2xl'>
       <span></span>
       <ul className='flex gap-5 text-[20px]'>
         <li>Home</li>
