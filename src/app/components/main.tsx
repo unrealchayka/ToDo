@@ -93,7 +93,7 @@ const IconItem: React.FC<{
 );
 
 // Основные компоненты
-const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes, sizeWindowBool, handleAside }) => {
+const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes, sizeWindowBool }) => {
     const firstIconList = [
         { id: 'note', icon: <FaNoteSticky /> },
         { id: 'timer', icon: <RxLapTimer /> },
