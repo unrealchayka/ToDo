@@ -1,6 +1,8 @@
 'use client'
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { isMobile } from 'react-device-detect';
+
 import {
     IoCalendar, IoCalendarNumberOutline, IoSearch, IoNotifications,
     IoInformationCircleOutline
@@ -16,6 +18,8 @@ import { TfiReload } from "react-icons/tfi";
 import { CgCheckO } from "react-icons/cg";
 import { RxLapTimer } from "react-icons/rx";
 import { HiMiniCube } from "react-icons/hi2";
+import { FaHamburger } from "react-icons/fa";
+
 
 // Типы
 interface Props {
@@ -32,6 +36,14 @@ interface Indexes {
 interface AsideProps {
     indexes: Indexes;
     handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
+    sizeWindowBool?: boolean;
+    viewAside?: boolean;
+    handleAside?: () => void;
+}
+
+interface MainWindowProps {
+    handleAside?: () => void;
+    viewAside: boolean;
     sizeWindowBool?: boolean;
 }
 
@@ -81,7 +93,7 @@ const IconItem: React.FC<{
 );
 
 // Основные компоненты
-const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes, sizeWindowBool }) => {
+const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes, sizeWindowBool, handleAside }) => {
     const firstIconList = [
         { id: 'note', icon: <FaNoteSticky /> },
         { id: 'timer', icon: <RxLapTimer /> },
@@ -281,16 +293,40 @@ const AsideTimer = () => {
     );
 };
 
-const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
-    const sizeWindowBool = [0, 1, 2].includes(indexes.blueIndex);
+const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside, sizeWindowBool, handleAside }) => {
+    const mobileClasses = 'm-auto left-[50%] translate-x-[-50%] w-[90vw] h-screen'
 
+    const [isReady, setIsReady] = useState(false);
+
+    const animateAside = {
+        width: sizeWindowBool ? '23%' : '110px',
+        left: viewAside ? '-26%' : '0%'
+    }
+
+    const mobileAnimateAside = {
+        width: sizeWindowBool ? '90%' : '110px',
+        left: viewAside ? '50%' : '-100%'
+    }
+
+
+    const initialAside = { width: '23%', left: '-26%' }
+
+    const mobileInitialAside = { left: '-26%', top: '50px' }
+
+    useEffect(() => {
+        setIsReady(true);
+    }, []);
     return (
         <motion.div
-            initial={{ width: 110 }}
-            animate={{ width: sizeWindowBool ? 500 : 110 }}
-            className="box-3d-shadow h-full bg-[#111] flex gap-3 rounded-3xl p-4"
+            initial={isReady && (!isMobile ? initialAside: mobileInitialAside)}
+            animate={isReady && (!isMobile ? animateAside: mobileAnimateAside)}
+            transition={{
+                duration: 0.5,
+                ease: 'easeInOut'
+            }}
+            className={`absolute overflow-hidden ${isReady && (isMobile && mobileClasses)} min-w-[110px] z-3 left-0 box-3d-shadow h-full bg-[#111] flex gap-3 rounded-3xl p-4`}
         >
-            <AsideMenu indexes={indexes} handleIndexes={handleIndexes} sizeWindowBool={sizeWindowBool} />
+            <AsideMenu indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} sizeWindowBool={sizeWindowBool} />
             <AnimatePresence mode="wait">
                 {indexes.blueIndex === 0 && (
                     <motion.div
@@ -315,13 +351,13 @@ const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
     );
 };
 
-const MainWindow = () => (
-    <div className="box-3d-shadow bg-[#111] w-full h-full p-4 rounded-3xl">
-        <div className="border-hover w-full h-full rounded-xl"></div>
-    </div>
-);
-
 export const Main: React.FC<Props> = ({ className }) => {
+
+    const [viewAside, setViewAside] = useState<boolean>(true);
+    function handleAside() {
+        setViewAside(!viewAside);
+        console.log(viewAside)
+    };
     const [indexes, setIndexes] = useState({
         orangeIndex: 0,
         blueIndex: 0,
@@ -329,14 +365,67 @@ export const Main: React.FC<Props> = ({ className }) => {
         purpleIndex: 2
     });
 
+    const sizeWindowBool = [0, 1, 2].includes(indexes.blueIndex);
+
     const handleIndexes = (nameIndex: keyof Indexes, value: number) => {
         setIndexes(prev => ({ ...prev, [nameIndex]: value }));
     };
 
     return (
-        <div className={`flex gap-4 3xl:gap-10 h-full container m-auto ${className}`}>
-            <Aside indexes={indexes} handleIndexes={handleIndexes} />
-            <MainWindow />
+        <div className={`flex relative gap-4 3xl:gap-10 h-full container m-auto ${className}`}>
+            <div
+                        className='absolute z-5 text-[25px] text-[white] transition-all duration-500 hover:text-[var(--blue)] cursor-pointer'
+                        onClick={handleAside}
+                        >
+                        <FaHamburger />
+                    </div>
+            <Aside indexes={indexes} handleIndexes={handleIndexes} viewAside={viewAside} sizeWindowBool={sizeWindowBool} handleAside={handleAside} />
+            <MainWindow handleAside={handleAside} viewAside={viewAside} sizeWindowBool={sizeWindowBool} />
         </div>
     );
 };
+
+const MainWindow: React.FC<MainWindowProps> = ({ handleAside, viewAside, sizeWindowBool }) => {
+    // Для SSR: начальное состояние должно совпадать на сервере и клиенте
+    const [isReady, setIsReady] = useState(false);
+  
+    useEffect(() => {
+      setIsReady(true); // Устанавливаем флаг, что компонент смонтирован на клиенте
+    }, []);
+  
+    if (!isReady) {
+      // Возвращаем пустой div во время SSR и начальной гидратации
+      return <div className="hidden" />;
+    }
+  
+    // Не рендерим на мобильных устройствах
+    if (isMobile) {
+      return null;
+    }
+  
+    return (
+      <motion.div
+        initial={{ width: '100%' }}
+        animate={{
+          width: !sizeWindowBool
+            ? '92%'
+            : viewAside
+              ? '100%'
+              : '75%'
+        }}
+        transition={{
+          duration: 0.5,
+          ease: 'easeInOut'
+        }}
+        className={`absolute right-0 top-0 box-3d-shadow bg-[#111] h-full p-4 rounded-3xl`}
+      >
+        <div
+          className='absolute top-7 left-7 text-[25px] text-[white] transition-all duration-500 hover:text-[var(--blue)] cursor-pointer'
+          onClick={handleAside}
+        >
+          <FaHamburger />
+        </div>
+        <div className="border-hover w-full h-full rounded-xl"></div>
+      </motion.div>
+    );
+  };
