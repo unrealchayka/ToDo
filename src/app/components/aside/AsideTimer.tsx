@@ -5,7 +5,7 @@ import { ANIMATION } from "../shared/animations";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { AsideWindows } from "../shared/types";
 
-export const AsideTimer: React.FC<AsideWindows> = ({ handleAside })=> {
+export const AsideTimer: React.FC<AsideWindows> = ()=> {
     const [history, setHistory] = useState<{ id: string; time: string }[]>([]);
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);

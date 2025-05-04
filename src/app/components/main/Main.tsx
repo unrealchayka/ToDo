@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Indexes } from "../shared/types";
-import { Aside } from "../aside/Aside";
 import { MainWindow } from "./MainWindow";
 
 export const Main = () => {

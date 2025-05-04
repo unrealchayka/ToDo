@@ -1,11 +1,11 @@
 'use client'
 import { AsideProps, Indexes } from "../shared/types";
 import { ACTIVE_COLORS } from "../shared/constants";
-import { RiTimerFlashLine, BsCalendarDay, BsCalendarWeek, IoCalendarNumberOutline, FaBoxArchive, VscListSelection, TbFilters, FaExclamationTriangle, CgCheckO, IoIosCloseCircleOutline } from '../shared/icons'
+import { RiTimerFlashLine, BsCalendarDay, BsCalendarWeek, IoCalendarNumberOutline, FaBoxArchive, VscListSelection, TbFilters, FaExclamationTriangle, CgCheckO } from '../shared/icons'
 import { motion } from "framer-motion";
 
 
-export const  AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes, handleAside }) => {
+export const  AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
     const dataSections = [
         {
             title: 'Dedlines',
