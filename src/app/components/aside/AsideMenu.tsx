@@ -15,8 +15,8 @@ export const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
                         <IconItem
                             key={icon.id}
                             icon={icon.icon}
-                            active={index === indexes.blueIndex}
-                            onClick={() => handleIndexes('blueIndex', index)}
+                            active={index === indexes.asidemenu}
+                            onClick={() => handleIndexes('asidemenu', index)}
                             color={ACTIVE_COLORS.blue}
                         />
                     ))}

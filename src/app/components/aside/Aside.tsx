@@ -6,7 +6,7 @@ import { ANIMATION } from "../shared/animations";
 import { AsideToDo } from "./AsideToDo";
 import { AsideTimer } from "./AsideTimer";
 
-export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside, handleAside }) => {
+export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside, handleAside, clearIndexes }) => {
 
 
     const animateAside = {
@@ -25,19 +25,20 @@ export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside,
                 ease: 'easeInOut'
             }}
             className={`absolute left-0 bottom-0 h-full overflow-hidden text-[var(--light)] w-[20%] min-w-[300px] z-3  flex gap-3`}
-        >   
+        >
             <AsideMenu indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} />
             <AnimatePresence mode="wait">
-                {indexes.blueIndex === 0 && (
+                {indexes.asidemenu === 0 && (
                     <motion.div
                         key="ToDo"
                         {...ANIMATION.slide}
                         className="overflow-hidden relative w-full"
                     >
-                        <AsideToDo indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} />
+                        <AsideToDo indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} clearIndexes={clearIndexes} />
+                        
                     </motion.div>
                 )}
-                {indexes.blueIndex === 1 && (
+                {indexes.asidemenu === 1 && (
                     <motion.div
                         key="Timer"
                         {...ANIMATION.slide}

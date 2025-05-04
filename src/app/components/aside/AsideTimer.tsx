@@ -27,14 +27,17 @@ export const AsideTimer: React.FC<AsideWindows> = ()=> {
     const toggleTimer = () => setIsRunning(prev => !prev);
     const resetTimer = () => {
         if (isRunning) {
-            setHistory(prev => [...prev, { id: Date.now().toString(), time: formatTime(time) }]);
+            setHistory(prev => [
+                { id: Date.now().toString(), time: formatTime(time) },
+                ...prev.slice(0, 9)
+              ]);
             setIsRunning(false);
             setTime(0);
         }
     };
 
     return (
-        <motion.div className="whitespace-nowrap absolute w-full h-full flex flex-col rounded-xl rounded-l-[0]">
+        <motion.div className="whitespace-nowrap absolute w-full h-full flex flex-col pt-[10%] rounded-xl rounded-l-[0]">
             <div className="text-[40px] text-center font-[900] py-10">
                 {formatTime(time)}
             </div>
@@ -69,7 +72,9 @@ export const AsideTimer: React.FC<AsideWindows> = ()=> {
                             </span>
                             <span key={`time-${Date.now()}`}>{item.time}</span>
                             <IoIosCloseCircleOutline key={`icon-${Date.now()}`}
-                                onClick={() => setHistory(prev => prev.filter(i => i.id !== item.id))}
+                                onClick={() => {
+                                    setHistory(prev => prev.filter(i => i.id !== item.id))
+                                }}
                                 className="text-[red] cursor-pointer"
                             />
                         </motion.div>

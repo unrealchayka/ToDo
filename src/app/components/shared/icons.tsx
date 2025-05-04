@@ -16,6 +16,7 @@ import { RxLapTimer } from "react-icons/rx";
 import { HiMiniCube } from "react-icons/hi2";
 import { FaHamburger } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { GrClearOption } from "react-icons/gr";
 
 
 const IconItem: React.FC<{
@@ -58,6 +59,6 @@ const secondIconList = [
 export {
     IoCalendar, IoCalendarNumberOutline, IoSearch, IoNotifications,IoInformationCircleOutline,
     IoIosCloseCircleOutline, BsCalendarDay, BsCalendarWeek, FaBoxArchive, FaExclamationTriangle,
-    VscListSelection,RiTimerFlashLine,TbFilters, CgCheckO, FaHamburger,
+    VscListSelection,RiTimerFlashLine,TbFilters, CgCheckO, FaHamburger, GrClearOption,
     IconItem, firstIconList, secondIconList
 }

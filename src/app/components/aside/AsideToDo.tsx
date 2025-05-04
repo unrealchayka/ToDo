@@ -1,11 +1,11 @@
 'use client'
 import { AsideProps, Indexes } from "../shared/types";
 import { ACTIVE_COLORS } from "../shared/constants";
-import { RiTimerFlashLine, BsCalendarDay, BsCalendarWeek, IoCalendarNumberOutline, FaBoxArchive, VscListSelection, TbFilters, FaExclamationTriangle, CgCheckO } from '../shared/icons'
+import { RiTimerFlashLine, BsCalendarDay, BsCalendarWeek, IoCalendarNumberOutline, FaBoxArchive, VscListSelection, TbFilters, FaExclamationTriangle, CgCheckO, GrClearOption } from '../shared/icons'
 import { motion } from "framer-motion";
 
 
-export const  AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
+export const AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes, clearIndexes }) => {
     const dataSections = [
         {
             title: 'Dedlines',
@@ -46,8 +46,8 @@ export const  AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes }) => 
     ];
 
     return (
-        <motion.div className="z-1 text-[13px] sm:text-[16px] 3xl:text-[20px] whitespace-nowrap absolute flex flex-col gap-2 3xl:gap-8 w-full h-full rounded-xl rounded-l-[0]">
-            
+        <motion.div className="z-1 text-[13px] sm:text-[16px] 3xl:text-[18px] whitespace-nowrap absolute flex flex-col justify-center gap-2 3xl:gap-8 w-full h-full rounded-xl rounded-l-[0]">
+
             {dataSections.map((section) => (
                 <div key={section.title} className="px-5 pt-2">
                     <p className="mb-1 pt-0 flex gap-2 items-center" style={{ color: section.color }}>
@@ -79,6 +79,15 @@ export const  AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes }) => 
                     </motion.ul>
                 </div>
             ))}
+            <motion.div
+                onClick={clearIndexes}
+                className="text-[--light] bottom-10 left-[30%] flex justify-center gap-5 items-center cursor-pointer z-5 text-center w-full"
+            >
+                <span className="w-8 h-8 flex justify-center  text-[var(--dark)] items-center bg-[var(--color-7)] text-[20px] rounded-full">
+                    <GrClearOption />
+                </span>
+                Clear Filtres
+            </motion.div>
         </motion.div>
     );
 };
