@@ -5,21 +5,23 @@
 };
 
 :root {
-  --dark: #111;
-  --light: #cacaca;
+  --dark: #050505;
+  --light: #ffffff;
   --orange: #fca311;
   --green: #70e000;
   --purple: #7b2cbf;
   --blue: #56cfe1;
-  --color-1: #f8f9fa;
-  --color-2: #e9ecef;
-  --color-3: #dee2e6;
-  --color-4: #ced4da;
-  --color-5: #adb5bd;
-  --color-6: #6c757d;
-  --color-7: #495057;
-  --color-8: #343a40;
-  --color-9: #212529;
+  --color-1: #080808;
+  --color-2: #101010;
+  --color-3: #555;
+  --color-4: #ffee32;
+  --color-5: #d6d6d6;
+  --color-6: #41ead4;
+  --color-7: #fbff12;
+  --color-8: #ff206e;
+  --color-9: #dc2f02;
+  --color-10: #6a040f;
+  --color-11: #f48c06;
 }
 
 body {
@@ -33,36 +35,26 @@ body {
   color: blue;
 }
 
-.box-3d-inset-shadow{
-  box-shadow: 
-    inset 1px 1px 3px  rgba(0, 0, 0, 0.3),
-    -3px -4px 3px  rgba(0, 0, 0, 0.3),
-    3px 4px 3px  rgba(255, 255, 255, 1),
-    inset -1px -1px 5px  rgba(255, 255, 255, 1);
-}
+.bg-dark{
+  background: var(--color-1);
 
-.box-3d-shadow{
-  box-shadow: 
-    5px 5px 3px  rgba(0, 0, 0, 0.4),
-    inset -2px -2px 3px  rgba(0, 0, 0, 0.4),
-    inset 2px 2px 3px  #171717,
-    -2px -2px 5px  #171717;
 }
-
 
 .border-hover{
-  border: 6px solid #151515;
-  transition: all .5s linear;
+  border: 2px solid var(--color-5);
 }
+
+.border-hover-aside{
+  border: 2px solid var(--color-5);
+}
+
+.border-hover-close{
+  border-left: 2px solid var(--color-5);
+  border-bottom: 2px solid var(--color-5);
+  border-radius: 0 0 0 15px;
+}
+
 
 .border-hover-bottom{
-  border-bottom: 6px solid #151515;
-  transition: all .5s linear;
-}
-.border-hover:hover > .border-hover-bottom{
-  border-color: #222;
-}
-
-.border-hover:hover{
-  border-color: #222;
+  border-bottom: 6px solid var(--color-2);
 }
