@@ -28,11 +28,11 @@ export const Main = () => {
       }
 
     const handleIndexes = (nameIndex: keyof Indexes, value: number) => {
-        indexes[nameIndex] == value 
-            ?
-            setIndexes(({...indexes, [nameIndex]: null }))
-            :
-            setIndexes(({...indexes, [nameIndex]: value }));
+        if (indexes[nameIndex] === value) {
+            setIndexes({ ...indexes, [nameIndex]: null });
+        } else {
+            setIndexes({ ...indexes, [nameIndex]: value });
+        }
     };
 
     return (
