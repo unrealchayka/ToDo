@@ -12,7 +12,6 @@ export interface Indexes {
 export interface AsideProps {
     indexes: Indexes;
     handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
-    sizeWindowBool?: boolean;
     viewAside?: boolean;
     handleAside?: () => void;
 }
@@ -25,4 +24,7 @@ export interface MainWindowProps {
     handleAside?: () => void;
     viewAside: boolean;
     sizeWindowBool?: boolean;
+    indexes: Indexes;
+    handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
+
 }

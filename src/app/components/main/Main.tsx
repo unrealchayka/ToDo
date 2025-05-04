@@ -25,8 +25,7 @@ export const Main = () => {
 
     return (
         <div className={`flex relative  gap-4 3xl:gap-10 h-full container m-auto`}>
-            <Aside indexes={indexes} handleIndexes={handleIndexes} viewAside={viewAside} handleAside={handleAside} />
-            <MainWindow handleAside={handleAside} viewAside={viewAside} />
+            <MainWindow handleAside={handleAside} viewAside={viewAside} indexes={indexes} handleIndexes={handleIndexes} />
         </div>
     );
 };

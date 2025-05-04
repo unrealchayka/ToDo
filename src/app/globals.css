@@ -54,6 +54,12 @@ body {
   border-radius: 0 0 0 15px;
 }
 
+.border-hover-open{
+  border-right: 2px solid var(--color-5);
+  border-bottom: 2px solid var(--color-5);
+  border-radius: 0 0 15px 0;
+}
+
 
 .border-hover-bottom{
   border-bottom: 6px solid var(--color-2);

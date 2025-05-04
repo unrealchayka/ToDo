@@ -34,15 +34,11 @@ export const AsideTimer: React.FC<AsideWindows> = ({ handleAside })=> {
     };
 
     return (
-        <motion.div className="border-hover-aside whitespace-nowrap absolute w-full h-full flex flex-col rounded-xl rounded-l-[0]">
+        <motion.div className="whitespace-nowrap absolute w-full h-full flex flex-col rounded-xl rounded-l-[0]">
             <div className="text-[40px] text-center font-[900] py-10">
                 {formatTime(time)}
             </div>
-            <IoIosCloseCircleOutline 
-                key={`icon-${Date.now()}`}
-                onClick={handleAside}
-                className="text-[red] bg-[var(--color-1)] border-hover-close w-10 h-10 p-1 z-[4] cursor-pointer absolute -top-2 -right-2"
-            />
+
             <div className="flex gap-5 justify-center border-hover-bottom pb-10">
                 <motion.button
                     className={`px-6 py-2 text-white border-none rounded-lg cursor-pointer text-base ${isRunning ? 'bg-[#ef4444]' : 'bg-[#3b82f6]'

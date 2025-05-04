@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
-import { Header } from "./components/header";
 
 import "./globals.css";
 import { Main } from "./components/main/Main";
+import { Header } from "./components/header";
 
 
 const quicksand = Quicksand({
@@ -30,8 +30,8 @@ export default function RootLayout({
         className={`${quicksand.variable} ${quicksand.variable} relative bg-[var(--dark)] flex items-center justify-center`} 
         style={{fontFamily: 'var(--font-quicksand)'}}
       >
-        
-        <div className="flex container gap-3 p-3 flex-col justify-center items-center h-[1060px] 3xl:gap-10 3xl:p-10">
+
+        <div className="flex container gap-8 p-3 sm:p-5 flex-col justify-center items-center h-screen max-h-[1000px] ">
           <Header/>
           <Main/>
         </div>

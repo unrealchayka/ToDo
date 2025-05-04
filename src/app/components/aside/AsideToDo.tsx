@@ -46,15 +46,11 @@ export const  AsideToDo: React.FC<AsideProps> = ({ indexes, handleIndexes, handl
     ];
 
     return (
-        <motion.div className="border-hover-aside z-1 text-[13px] sm:text-[16px] 3xl:text-[20px] whitespace-nowrap absolute flex flex-col gap-2 3xl:gap-8 w-full h-full rounded-xl rounded-l-[0]">
-            <IoIosCloseCircleOutline 
-                key={`icon-${Date.now()}`}
-                onClick={handleAside}
-                className="text-[red] bg-[var(--color-1)] border-hover-close w-10 h-10 p-1 z-[4] cursor-pointer absolute -top-2 -right-2"
-            />
+        <motion.div className="z-1 text-[13px] sm:text-[16px] 3xl:text-[20px] whitespace-nowrap absolute flex flex-col gap-2 3xl:gap-8 w-full h-full rounded-xl rounded-l-[0]">
+            
             {dataSections.map((section) => (
                 <div key={section.title} className="px-5 pt-2">
-                    <p className="mb-1 pt-3 flex gap-2 items-center" style={{ color: section.color }}>
+                    <p className="mb-1 pt-0 flex gap-2 items-center" style={{ color: section.color }}>
                         {section.title} {section.icon}
                     </p>
                     <motion.ul layout className="w-full inline-flex flex-col gap-3">

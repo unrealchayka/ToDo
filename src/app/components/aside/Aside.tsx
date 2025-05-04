@@ -24,7 +24,7 @@ export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside,
                 duration: 0.5,
                 ease: 'easeInOut'
             }}
-            className={`absolute border border-[var(--color-7)] left-0 bg-dark max-h-[100vh] h-full overflow-hidden text-[var(--light)] w-[25%] min-w-[350px] z-3  flex gap-3 rounded-3xl p-4`}
+            className={`absolute left-0 bottom-0 h-full overflow-hidden text-[var(--light)] w-[20%] min-w-[300px] z-3  flex gap-3`}
         >   
             <AsideMenu indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} />
             <AnimatePresence mode="wait">
