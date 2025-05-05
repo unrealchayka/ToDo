@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 export const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
 
     return (
-        <div className={`flex flex-col justify-between items-center text-[15px] md:text-[25px] text-[var(--color-3)] rounded-xl pt-10 rounded-r-none`}>
+        <div className={`flex relative z-8 flex-col justify-between items-center text-[15px] md:text-[25px] text-[var(--color-3)] rounded-xl pt-10 rounded-r-none`}>
             <div>
                 <motion.ul layout className="h-full justify-center items-center inline-flex flex-col gap-3 p-2 md:p-5 ">
                     {firstIconList.map((icon, index) => (

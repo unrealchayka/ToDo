@@ -28,6 +28,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.scroll-bar{
+  max-height: 30%;
+  border-bottom: 1px solid var(--green);
+  border-top: 1px solid var(--green);
+  scrollbar-color: var(--green) var(--color-1);
+}
+
 .active-gradient{
   background: linear-gradient(90deg, #4cc9f0, #4895ef, #4361ee, #3f37c9);
   -webkit-background-clip: text;

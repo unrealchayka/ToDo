@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { Indexes } from "../shared/types";
 import { MainWindow } from "./MainWindow";
+import { ToDoTasks } from "../shared/constants";
 
 export const Main = () => {
-
+    const [data] = useState(ToDoTasks)
     const [viewAside, setViewAside] = useState<boolean>(false);
     function handleAside() {
         setViewAside(!viewAside);
@@ -37,7 +38,7 @@ export const Main = () => {
 
     return (
         <div className={`flex relative  gap-4 3xl:gap-10 h-full container m-auto`}>
-            <MainWindow handleAside={handleAside} viewAside={viewAside} indexes={indexes} handleIndexes={handleIndexes} clearIndexes={clearIndexes} />
+            <MainWindow data={data} handleAside={handleAside} viewAside={viewAside} indexes={indexes} handleIndexes={handleIndexes} clearIndexes={clearIndexes} />
         </div>
     );
 };

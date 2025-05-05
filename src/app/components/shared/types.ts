@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface Props {
     className?: string;
 }
@@ -10,8 +12,28 @@ export interface Indexes{
   }
 
 
+export interface FilterItem {
+    title: string;
+    icon: ReactNode;
+    count: string;
+  }
+  
+export interface FiltersDictionary {
+    title: string;
+    icon: ReactNode;
+    color: string; // или более конкретный тип, если ACTIVE_COLORS имеет свою типизацию
+    items: FilterItem[];
+    indexKey: string; // или более конкретный тип, например: 'purpleIndex' | 'blueIndex' | etc
+  }
 
+export interface AsideToDoMenuType {
+    section: FiltersDictionary;
+    data?: TaskCategory[];
+    indexes: Indexes;
+    handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
+}
 export interface AsideProps {
+    data: TaskCategory[]
     indexes: Indexes;
     handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
     viewAside?: boolean;
@@ -21,12 +43,16 @@ export interface AsideProps {
 }
 
 export interface AsideWindows {
+    data?: TaskCategory[]
     handleAside?: () => void;
     clearIndexes?: () => void;
+    handleFullTimer?: () => void;
+    fullTimer?: boolean
 
 }
 
 export interface MainWindowProps {
+    data: TaskCategory[]
     handleAside?: () => void;
     viewAside: boolean;
     sizeWindowBool?: boolean;
@@ -49,9 +75,16 @@ export interface Task {
 export interface TaskCategory {
     id: string;
     title: string;
-    icon: string;
     tasks: Task[];
 }
+
+export interface AsideToDoTaskTypes{
+    data: TaskCategory[];
+    indexes: Indexes;
+    handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
+
+}
+
 export interface DateFilterResult {
     today: Task[];
     nextWeek: Task[];

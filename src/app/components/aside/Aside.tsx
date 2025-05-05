@@ -5,8 +5,9 @@ import { AsideMenu } from "./AsideMenu";
 import { ANIMATION } from "../shared/animations";
 import { AsideToDo } from "./AsideToDo";
 import { AsideTimer } from "./AsideTimer";
+import { useState } from "react";
 
-export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside, handleAside, clearIndexes }) => {
+export const Aside: React.FC<AsideProps> = ({ data,  indexes, handleIndexes, viewAside, handleAside, clearIndexes }) => {
 
 
     const animateAside = {
@@ -15,6 +16,11 @@ export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside,
 
     const initialAside = { x: '-200%' }
 
+    const [fullTimer, setFullTimer] = useState<boolean>(false)
+
+    function handleFullTimer(){
+        setFullTimer(!fullTimer)
+    }
 
     return (
         <motion.div
@@ -24,29 +30,32 @@ export const Aside: React.FC<AsideProps> = ({ indexes, handleIndexes, viewAside,
                 duration: 0.5,
                 ease: 'easeInOut'
             }}
-            className={`absolute left-0 bottom-0 h-full overflow-hidden text-[var(--light)] w-[20%] min-w-[300px] z-3  flex gap-3`}
+            className={`absolute left-0 bottom-0 h-full text-[var(--light)] w-full min-w-[300px] z-3  flex gap-3`}
         >
-            <AsideMenu indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} />
-            <AnimatePresence mode="wait">
+            <AsideMenu data={data} indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} />
+            <AnimatePresence>
                 {indexes.asidemenu === 0 && (
                     <motion.div
                         key="ToDo"
                         {...ANIMATION.slide}
-                        className="overflow-hidden relative w-full"
+                        className={`absolute w-[80%] sm:w-[15%] h-full left-15 ${indexes.asidemenu === 0? 'z-5': 'z-0'}`}
                     >
-                        <AsideToDo indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} clearIndexes={clearIndexes} />
+                        <AsideToDo data={data} indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} clearIndexes={clearIndexes} />
                         
                     </motion.div>
                 )}
-                {indexes.asidemenu === 1 && (
                     <motion.div
                         key="Timer"
-                        {...ANIMATION.slide}
-                        className="overflow-hidden relative w-full"
+                        initial = {{opacity: 0, width: '300px'}}
+                        animate= {{ 
+                            opacity: indexes.asidemenu === 1? 1: 0,
+                            width: fullTimer? '95%' : '300px',
+                        }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className={`absolute h-full ${indexes.asidemenu === 1? 'z-5': 'z-0'}`}
                     >
-                        <AsideTimer handleAside={handleAside} />
+                        <AsideTimer handleAside={handleAside} handleFullTimer={handleFullTimer} fullTimer={fullTimer} />
                     </motion.div>
-                )}
             </AnimatePresence>
         </motion.div>
     );

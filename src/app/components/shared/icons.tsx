@@ -17,7 +17,7 @@ import { HiMiniCube } from "react-icons/hi2";
 import { FaHamburger } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { GrClearOption } from "react-icons/gr";
-
+import { VscScreenFull } from "react-icons/vsc";
 
 const IconItem: React.FC<{
     icon: React.ReactNode;
@@ -59,6 +59,6 @@ const secondIconList = [
 export {
     IoCalendar, IoCalendarNumberOutline, IoSearch, IoNotifications,IoInformationCircleOutline,
     IoIosCloseCircleOutline, BsCalendarDay, BsCalendarWeek, FaBoxArchive, FaExclamationTriangle,
-    VscListSelection,RiTimerFlashLine,TbFilters, CgCheckO, FaHamburger, GrClearOption,
+    VscListSelection,RiTimerFlashLine,TbFilters, CgCheckO, FaHamburger, GrClearOption, VscScreenFull,
     IconItem, firstIconList, secondIconList
 }

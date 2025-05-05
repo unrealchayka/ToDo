@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { FaAnglesLeft } from "react-icons/fa6";
 import { Aside } from "../aside/Aside";
 
-export const MainWindow: React.FC<MainWindowProps> = ({ handleAside, indexes, handleIndexes, viewAside, clearIndexes}) => {
+export const MainWindow: React.FC<MainWindowProps> = ({ data, handleAside, indexes, handleIndexes, viewAside, clearIndexes}) => {
 
   return (
     <motion.div
@@ -32,7 +32,7 @@ export const MainWindow: React.FC<MainWindowProps> = ({ handleAside, indexes, ha
         </motion.div>
       </motion.div>
       <div className="relative overflow-hidden border-hover w-full h-full">
-        <Aside indexes={indexes} handleIndexes={handleIndexes} viewAside={viewAside} handleAside={handleAside} clearIndexes={clearIndexes}  />
+        <Aside data={data} indexes={indexes} handleIndexes={handleIndexes} viewAside={viewAside} handleAside={handleAside} clearIndexes={clearIndexes}  />
       </div>
     </motion.div>
   );
