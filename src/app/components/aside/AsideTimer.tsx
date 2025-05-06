@@ -38,15 +38,15 @@ export const AsideTimer: React.FC<AsideWindows> = ({ fullTimer, handleFullTimer 
     };
 
     return (
-        <motion.div className={`whitespace-nowrap  ${!fullTimer&&'sm:border-r sm:border-[var(--color-5)]'} ml-10 sm:ml-20 w-full h-full flex flex-col px-3 pt-2`}>
+        <motion.div className={`whitespace-nowrap  ${!fullTimer&&'sm:border-r sm:border-[var(--color-5)]'} sm:ml-20 w-full h-full flex flex-col px-3 pt-2`}>
             <div className="text-[20px] text-[var(--color-8)] flex flex-col gap-3">
                 <div className="absolute hidden sm:block z-5 top-4 right-5 md:right-[-70px]"
                     onClick={handleFullTimer}
                 >
                     <VscScreenFull />
                 </div>
-                <span className="relative">Active Task: </span>
-                <div className="text-[var(--light)] bg-[var(--color-3)]/20 w-[200px] border border-[var(--light)] flex justify-between items-center px-3 rounded-md">
+                <span className="relative text-center m-auto sm:text-start sm:mx-0">Active Task: </span>
+                <div className="text-[var(--light)] bg-[var(--color-3)]/20 w-[200px] m-auto sm:mx-0 border border-[var(--light)] flex justify-between items-center px-3 rounded-md">
                     <h3 className="font-[400] text-center">Name Task</h3>
                     <IoIosCloseCircleOutline key={`icon-${Date.now()}`}
 

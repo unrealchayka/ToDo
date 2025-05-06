@@ -52,7 +52,7 @@ export const Aside: React.FC<AsideProps> = ({ data,  indexes, handleIndexes, vie
                             width: fullTimer? '95%' : '300px',
                         }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className={`absolute h-full ${indexes.asidemenu === 1? 'z-5': 'z-0'}`}
+                        className={`absolute left-[50%] translate-x-[-50%] sm:left-0 sm:translate-0  h-full ${indexes.asidemenu === 1? 'z-5': 'z-0'}`}
                     >
                         <AsideTimer handleAside={handleAside} handleFullTimer={handleFullTimer} fullTimer={fullTimer} />
                     </motion.div>
