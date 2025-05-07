@@ -109,7 +109,7 @@ export const AsideToDo: React.FC<AsideProps> = ({ data,  indexes, handleIndexes,
     }
 
     return (
-        <motion.div className="z-1 text-[13px] sm:border-r sm:border-[var(--color-5)] sm:text-[16px] 3xl:text-[18px] whitespace-nowrap flex flex-col justify-center gap-2 3xl:gap-8 w-full h-full">
+        <motion.div className="z-1 text-[13px] sm:border-r-2 sm:border-[var(--color-5)] sm:text-[18px] whitespace-nowrap flex flex-col justify-center gap-2 3xl:gap-8 w-full h-full">
 
             <AsideToDoMenu section={dedlines} indexes={indexes} handleIndexes={handleIndexes}/>
             <AsideToDoTask data={data} indexes={indexes} handleIndexes={handleIndexes}/>

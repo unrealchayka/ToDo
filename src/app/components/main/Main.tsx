@@ -37,7 +37,7 @@ export const Main = () => {
     };
 
     return (
-        <div className={`flex relative  gap-4 3xl:gap-10 h-full container m-auto`}>
+        <div className={`container m-auto relative h-[90%] mt-10`}>
             <MainWindow data={data} handleAside={handleAside} viewAside={viewAside} indexes={indexes} handleIndexes={handleIndexes} clearIndexes={clearIndexes} />
         </div>
     );

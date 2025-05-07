@@ -38,25 +38,22 @@ export const AsideTimer: React.FC<AsideWindows> = ({ fullTimer, handleFullTimer 
     };
 
     return (
-        <motion.div className={`whitespace-nowrap  ${!fullTimer&&'sm:border-r sm:border-[var(--color-5)]'} sm:ml-20 w-full h-full flex flex-col px-3 pt-2`}>
-            <div className="text-[20px] text-[var(--color-8)] flex flex-col gap-3">
-                <div className="absolute hidden sm:block z-5 top-4 right-5 md:right-[-70px]"
+        <motion.div 
+            className={`whitespace-nowrap  ${!fullTimer&&'sm:border-r-2 sm:border-[var(--color-5)]'} w-full h-full flex flex-col px-3 pt-2`}
+            
+            >
+
+                <div className="absolute hidden sm:block text-[25px] z-5 top-4 right-5"
                     onClick={handleFullTimer}
                 >
                     <VscScreenFull />
                 </div>
-                <span className="relative text-center m-auto sm:text-start sm:mx-0">Active Task: </span>
-                <div className="text-[var(--light)] bg-[var(--color-3)]/20 w-[200px] m-auto sm:mx-0 border border-[var(--light)] flex justify-between items-center px-3 rounded-md">
-                    <h3 className="font-[400] text-center">Name Task</h3>
-                    <IoIosCloseCircleOutline key={`icon-${Date.now()}`}
 
-                        className="text-[red] cursor-pointer"
-                    />
-                </div>
-            </div>
             <div className={`
-                ${!fullTimer ? 'md:text-[55px] text-[55px] sm:py-10': 'md:text-[150px]'} 
-                transition-all py-3 duration-300 text-center font-[300]`}>
+                ${!fullTimer ? 'md:text-[75px] text-[55px] sm:py-10': 'md:text-[200px]'} 
+                transition-all py-3 duration-300 text-center font-[300]`}
+                
+                >
                 {formatTime(time)}
             </div>
 
@@ -83,7 +80,7 @@ export const AsideTimer: React.FC<AsideWindows> = ({ fullTimer, handleFullTimer 
                         <motion.div
                             {...ANIMATION.fade}
                             key={item.id}
-                            className="text-[var(--dark)] bg-[var(--light)] text-[18px] border-2 border-[var(--color-6)] flex justify-between items-center w-[250px] px-3 rounded-md"
+                            className="text-[var(--light)] bg-[var(--light)]/10 text-[18px] border-2 border-[var(--blue)] flex justify-between items-center w-[250px] px-3 rounded-md"
                         >
                             <span className="text-[15px] font-[700]" key={`result-${Date.now()}`}>
                                 {history.findIndex(i => i.id === item.id) + 1}.

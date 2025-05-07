@@ -1,9 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
 export const Header = () => {
   return (
-    <div className='flex justify-between uppercase text-[var(--light)] items-center w-full font-[600]'>
-      <span><Image src='svg/note.svg' width={100} height={0} alt='note' /></span>
+    <div className='flex justify-end mt-2 uppercase text-[var(--light)] items-center w-full font-[600]'>
       <ul className='flex gap-1 sm:gap-5 text-[12px] sm:text-[20px]'>
         <li>Home</li>
         <li>Todo</li>

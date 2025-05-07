@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
-
+import Image from 'next/image'
 import "./globals.css";
 import { Main } from "./components/main/Main";
 import { Header } from "./components/header";
+import { Micro_5 } from 'next/font/google'
+
+const micro5 = Micro_5({
+  subsets: ['latin'],
+  weight: "400",
+  variable: '--font-pixel'
+})
 
 
 const quicksand = Quicksand({
@@ -11,7 +18,6 @@ const quicksand = Quicksand({
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-quicksand',
 });
-
 
 
 export const metadata: Metadata = {
@@ -25,13 +31,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body
-        className={`${quicksand.variable} ${quicksand.variable} relative bg-[var(--dark)] flex items-center justify-center`} 
+        className={`${quicksand.variable} ${micro5.variable} bg-[var(--dark)]`} 
         style={{fontFamily: 'var(--font-quicksand)'}}
-      >
+      > 
+      <span><Image className="absolute top-5 left-5 w-[150]" src='svg/note.svg' width={0} height={0} alt='note' /></span>
 
-        <div className="flex container gap-8 p-3 sm:p-5 flex-col justify-center items-center h-screen max-h-[1000px] ">
+
+        <div className="m-auto p-3 sm:p-5 h-screen max-h-[1000px] ">
           <Header/>
           <Main/>
         </div>

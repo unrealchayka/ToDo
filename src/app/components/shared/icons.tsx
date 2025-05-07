@@ -26,7 +26,7 @@ const IconItem: React.FC<{
     color: string;
 }> = ({ icon, active, onClick }) => (
     <motion.li
-        className={`relative cursor-pointer ${!active && 'hover:text-[var(--color-8)]'}`}
+        className={`relative cursor-pointer ${!active && 'hover:text-[var(--color-5)]'}`}
         onClick={onClick}
     >
         <motion.span className={`relative z-10 transition-colors duration-700 ${active && 'text-[var(--color-1)]'}`}>
@@ -35,7 +35,7 @@ const IconItem: React.FC<{
         {active && (
             <motion.div
                 layoutId="activeIndicator"
-                className={`bg-[var(--color-8)] z-0 w-5 h-5 sm:w-10 sm:h-10 top-[50%] left-[50%] translate-[-50%] rounded-full absolute`}
+                className={`bg-[var(--color-5)] z-0 w-5 h-5 sm:w-10 sm:h-10 top-[50%] left-[50%] translate-[-50%] rounded-full absolute`}
             />
         )}
     </motion.li>
