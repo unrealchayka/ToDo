@@ -1,22 +1,18 @@
 import { ReactNode } from 'react';
 
-export interface Props {
-    className?: string;
-}
-
 export interface Indexes{
     asidemenu: number | null;
     timer: number | null;
     cube: number | null;
     calendar: number | null;
-  }
+}
 
 
 export interface FilterItem {
     title: string;
     icon: ReactNode;
     count: string;
-  }
+}
   
 export interface FiltersDictionary {
     title: string;
@@ -27,10 +23,7 @@ export interface FiltersDictionary {
   }
 
 export interface AsideToDoMenuType {
-    section: FiltersDictionary;
-    data?: TaskCategory[];
-    indexes: Indexes;
-    handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
+    section: FiltersDictionary; 
 }
 export interface AsideProps {
     data: TaskCategory[]
@@ -42,24 +35,12 @@ export interface AsideProps {
 
 }
 
-export interface AsideWindows {
-    data?: TaskCategory[]
-    handleAside?: () => void;
-    clearIndexes?: () => void;
+export interface TimerType {
     handleFullTimer?: () => void;
     fullTimer?: boolean
-
 }
 
-export interface MainWindowProps {
-    data: TaskCategory[]
-    handleAside?: () => void;
-    viewAside: boolean;
-    sizeWindowBool?: boolean;
-    indexes: Indexes;
-    handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
-    clearIndexes: () => void;
-}
+
 
 export interface Task {
     id: string;
@@ -70,7 +51,7 @@ export interface Task {
     priority: 'low' | 'medium' | 'high';
     finished: boolean;
     notes?: string;
-  }
+}
   
 export interface TaskCategory {
     id: string;
@@ -78,12 +59,7 @@ export interface TaskCategory {
     tasks: Task[];
 }
 
-export interface AsideToDoTaskTypes{
-    data: TaskCategory[];
-    indexes: Indexes;
-    handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
 
-}
 
 export interface DateFilterResult {
     today: Task[];

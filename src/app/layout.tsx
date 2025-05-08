@@ -5,6 +5,7 @@ import "./globals.css";
 import { Main } from "./components/main/Main";
 import { Header } from "./components/header";
 import { Micro_5 } from 'next/font/google'
+import { AppProvider } from "./components/provider/AppProvider";
 
 const micro5 = Micro_5({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="ru">
       <body
@@ -37,12 +39,10 @@ export default function RootLayout({
         style={{fontFamily: 'var(--font-quicksand)'}}
       > 
       <span><Image className="absolute top-5 left-5 w-[150]" src='svg/note.svg' width={0} height={0} alt='note' /></span>
-
-
-        <div className="m-auto p-3 sm:p-5 h-screen max-h-[1000px] ">
+        <AppProvider className="m-auto p- sm:p-5 max-h-[1080px]">
           <Header/>
           <Main/>
-        </div>
+        </AppProvider>
         {children}
       </body>
     </html>

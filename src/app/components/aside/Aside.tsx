@@ -1,14 +1,15 @@
 'use client'
-import { AsideProps } from "../shared/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { AsideMenu } from "./AsideMenu";
 import { ANIMATION } from "../shared/animations";
 import { AsideToDo } from "./AsideToDo";
 import { AsideTimer } from "./AsideTimer";
 import { useState } from "react";
+import { AppContext } from "../provider/AppProvider";
+import { useContext } from "react";
 
-export const Aside: React.FC<AsideProps> = ({ data,  indexes, handleIndexes, viewAside, handleAside, clearIndexes }) => {
-
+export const Aside = () => {
+    const { viewAside, indexes } = useContext(AppContext)
 
     const animateAside = {
         x: viewAside ? '-110%' : '0%'
@@ -30,17 +31,17 @@ export const Aside: React.FC<AsideProps> = ({ data,  indexes, handleIndexes, vie
                 duration: 0.5,
                 ease: 'easeInOut'
             }}
-            className={`absolute left-0 bottom-0 h-full text-[var(--light)] w-full min-w-[350px] z-3 flex gap-3`}
+            className={`absolute left-0 bottom-0 h-full text-[var(--light)] w-full min-w-[350px] flex gap-3`}
         >
-            <AsideMenu data={data} indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} />
+            <AsideMenu/>
             <AnimatePresence>
                 {indexes.asidemenu === 0 && (
                     <motion.div
                         key="ToDo"
                         {...ANIMATION.slide}
-                        className={`absolute w-full sm:w-[20%] h-full left-20 ${indexes.asidemenu === 0? 'z-5': 'z-0'}`}
+                        className={`absolute  w-full sm:w-[25%] bg-[var(--color-1)] pl-15 h-full ${indexes.asidemenu === 0? 'z-7': 'z-0'}`}
                     >
-                        <AsideToDo data={data} indexes={indexes} handleIndexes={handleIndexes} handleAside={handleAside} clearIndexes={clearIndexes} />
+                        <AsideToDo/>
                         
                     </motion.div>
                 )}
@@ -49,12 +50,12 @@ export const Aside: React.FC<AsideProps> = ({ data,  indexes, handleIndexes, vie
                         initial = {{opacity: 0, width: '20%'}}
                         animate= {{ 
                             opacity: indexes.asidemenu === 1? 1: 0,
-                            width: fullTimer? '95%' : '20%',
+                            width: fullTimer? '100%' : '25%',
                         }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className={`absolute left-[50%] translate-x-[-50%] sm:left-20 sm:translate-0  h-full ${indexes.asidemenu === 1? 'z-5': 'z-0'}`}
+                        className={`absolute left-[50%] translate-x-[-50%] bg-[var(--color-1)] sm:w-[25%] pl-15 sm:left-0 sm:translate-0  h-full z-6`}
                     >
-                        <AsideTimer handleAside={handleAside} handleFullTimer={handleFullTimer} fullTimer={fullTimer} />
+                        <AsideTimer handleFullTimer={handleFullTimer} fullTimer={fullTimer} />
                     </motion.div>
             </AnimatePresence>
         </motion.div>

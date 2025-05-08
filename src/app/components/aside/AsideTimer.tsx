@@ -3,10 +3,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { ANIMATION } from "../shared/animations";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { AsideWindows } from "../shared/types";
+import { TimerType } from "../shared/types";
 import { VscScreenFull } from "../shared/icons";
+import { useContext } from "react";
+import { AppContext } from "../provider/AppProvider";
 
-export const AsideTimer: React.FC<AsideWindows> = ({ fullTimer, handleFullTimer }) => {
+export const AsideTimer: React.FC<TimerType> = ({ fullTimer, handleFullTimer }) => {
+    const {borderColor} = useContext(AppContext)
     const [history, setHistory] = useState<{ id: string; time: string }[]>([]);
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
@@ -39,7 +42,7 @@ export const AsideTimer: React.FC<AsideWindows> = ({ fullTimer, handleFullTimer 
 
     return (
         <motion.div 
-            className={`whitespace-nowrap  ${!fullTimer&&'sm:border-r-2 sm:border-[var(--color-5)]'} w-full h-full flex flex-col px-3 pt-2`}
+            className={`whitespace-nowrap bg-[var(--color-1)]  ${!fullTimer&&'sm:border-r-2'} ${borderColor} duration-1000 w-full h-full flex flex-col px-3 pt-2`}
             
             >
 
@@ -51,7 +54,7 @@ export const AsideTimer: React.FC<AsideWindows> = ({ fullTimer, handleFullTimer 
 
             <div className={`
                 ${!fullTimer ? 'md:text-[75px] text-[55px] sm:py-10': 'md:text-[200px]'} 
-                transition-all py-3 duration-300 text-center font-[300]`}
+                transition-all py-3 mt-10 duration-300 text-center font-[300]`}
                 
                 >
                 {formatTime(time)}

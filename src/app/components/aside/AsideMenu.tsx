@@ -1,12 +1,15 @@
 'use client';
 import { IconItem } from '../shared/icons'
 import { firstIconList, secondIconList } from '../shared/icons';
-import { AsideProps } from '../shared/types';
 import { ACTIVE_COLORS } from '../shared/constants';
 import { motion } from 'framer-motion';
+import { useContext } from 'react';
+import { AppContext } from "../provider/AppProvider";
 
-export const AsideMenu: React.FC<AsideProps> = ({ indexes, handleIndexes }) => {
 
+export const AsideMenu = () => {
+    const context = useContext(AppContext);
+    const {indexes, handleIndexes} = context;
     return (
         <div className={`flex relative z-8 flex-col justify-between items-center text-[15px] md:text-[25px] text-[var(--color-3)] rounded-xl pt-10 rounded-r-none`}>
             <div>
