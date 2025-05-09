@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
-import Image from 'next/image'
 import "./globals.css";
 import { Main } from "./components/main/Main";
-import { Header } from "./components/header";
 import { Micro_5 } from 'next/font/google'
 import { AppProvider } from "./components/provider/AppProvider";
 import GridBackground from "./components/gridBackground";
@@ -41,7 +39,6 @@ export default function RootLayout({
       >  
         <GridBackground/>
         <AppProvider className="m-auto sm:p-3 overflow-hidden h-screen border border-white">
-          {/* <Header/> */}
           <Main/>
         </AppProvider>
         {children}
