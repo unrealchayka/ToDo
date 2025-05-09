@@ -46,7 +46,7 @@ export const AsideTimer: React.FC<TimerType> = ({ fullTimer, handleFullTimer }) 
             
             >
 
-                <div className="absolute hidden sm:block text-[25px] z-5 top-4 right-5"
+                <div className={`absolute ${fullTimer? 'right-42': 'right-2'} transition  hidden sm:block text-[30px] z-5 top-1 `}
                     onClick={handleFullTimer}
                 >
                     <VscScreenFull />

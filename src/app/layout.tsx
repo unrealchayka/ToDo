@@ -6,6 +6,7 @@ import { Main } from "./components/main/Main";
 import { Header } from "./components/header";
 import { Micro_5 } from 'next/font/google'
 import { AppProvider } from "./components/provider/AppProvider";
+import GridBackground from "./components/gridBackground";
 
 const micro5 = Micro_5({
   subsets: ['latin'],
@@ -35,12 +36,12 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${quicksand.variable} ${micro5.variable} bg-[var(--dark)]`} 
+        className={`${quicksand.variable} ${micro5.variable}`} 
         style={{fontFamily: 'var(--font-quicksand)'}}
-      > 
-      <span><Image className="absolute top-5 left-5 w-[150]" src='svg/note.svg' width={0} height={0} alt='note' /></span>
-        <AppProvider className="m-auto p- sm:p-5 max-h-[1080px]">
-          <Header/>
+      >  
+        <GridBackground/>
+        <AppProvider className="m-auto sm:p-3 overflow-hidden h-screen border border-white">
+          {/* <Header/> */}
           <Main/>
         </AppProvider>
         {children}

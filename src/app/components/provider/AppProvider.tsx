@@ -7,8 +7,6 @@ import { createContext, useState } from 'react';
 interface AppProviderContextType {
     data: TaskCategory[];
     setData: React.Dispatch<React.SetStateAction<TaskCategory[]>>;
-    viewAside: boolean;
-    handleAside: () => void;
     indexes: Indexes;
     handleIndexes: (nameIndex: keyof Indexes, value: number) => void;
     clearIndexes: () => void;
@@ -21,8 +19,6 @@ interface AppProviderContextType {
 export const AppContext = createContext<AppProviderContextType>({
     data: [],
     setData: () => { },
-    viewAside: false,
-    handleAside: () => { },
     indexes: { asidemenu: null, timer: null, cube: null, calendar: null },
     handleIndexes: () => { },
     clearIndexes: () => { },

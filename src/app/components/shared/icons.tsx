@@ -18,6 +18,7 @@ import { FaHamburger } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { GrClearOption } from "react-icons/gr";
 import { VscScreenFull } from "react-icons/vsc";
+import { AiFillMoon } from "react-icons/ai";
 
 const IconItem: React.FC<{
     icon: React.ReactNode;
@@ -60,5 +61,6 @@ export {
     IoCalendar, IoCalendarNumberOutline, IoSearch, IoNotifications,IoInformationCircleOutline,
     IoIosCloseCircleOutline, BsCalendarDay, BsCalendarWeek, FaBoxArchive, FaExclamationTriangle,
     VscListSelection,RiTimerFlashLine,TbFilters, CgCheckO, FaHamburger, GrClearOption, VscScreenFull,
+    AiFillMoon,
     IconItem, firstIconList, secondIconList
 }
