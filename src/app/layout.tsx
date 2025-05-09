@@ -35,11 +35,20 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="My Next.js PWA" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+      <meta name="mobile-web-app-capable" content="yes" />
+        
+        {/* Для iOS */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="My PWA" />
+        
+        {/* Для Windows */}
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        
+        {/* Viewport */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
         <title>My Next.js PWA</title>
       </Head>
       <body
