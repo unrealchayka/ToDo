@@ -5,6 +5,7 @@ import { Main } from "./components/main/Main";
 import { Micro_5 } from 'next/font/google'
 import { AppProvider } from "./components/provider/AppProvider";
 import GridBackground from "./components/gridBackground";
+import Head from "next/head";
 
 const micro5 = Micro_5({
   subsets: ['latin'],
@@ -33,6 +34,14 @@ export default function RootLayout({
 
   return (
     <html lang="ru">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="My Next.js PWA" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <title>My Next.js PWA</title>
+      </Head>
       <body
         className={`${quicksand.variable} ${micro5.variable}`} 
         style={{fontFamily: 'var(--font-quicksand)'}}
