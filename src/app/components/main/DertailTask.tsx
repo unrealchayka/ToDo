@@ -7,7 +7,7 @@ export const DertailTask = () => {
     const context = useContext(AppContext)
     const {data} = context
   return (
-    <div className='flex flex-col absolute right-60 text-[20px] z-3 h-full overflow-y-auto w-[58%] text-[var(--light)]'>
+    <div className='flex flex-col text-[20px] z-3 h-full overflow-y-auto w-full text-[var(--light)]'>
         <div className='overflow-y-scroll overflow-x-hidden task-scroll-bar py-10 w-full flex flex-col gap-10'>
             <h1 className='text-[50px] font-[700]'>Tasks Lists</h1>
             {data.map((item)=>{

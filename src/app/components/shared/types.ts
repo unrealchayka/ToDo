@@ -35,13 +35,6 @@ export interface AsideProps {
 
 }
 
-export interface TimerType {
-    handleFullTimer?: () => void;
-    fullTimer?: boolean
-}
-
-
-
 export interface Task {
     id: string;
     title: string;

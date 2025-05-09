@@ -25,8 +25,8 @@ const GridBackground = () => {
           height: "100%",
           backgroundSize: "10px 10px",
           backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255, 0.02) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255, 0.02) 1px, transparent 1px)
+            linear-gradient(to right, rgba(255,255,255, 0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255, 0.04) 1px, transparent 1px)
           `,
         }}
       />
