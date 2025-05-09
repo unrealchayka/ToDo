@@ -9,13 +9,7 @@ import { AppContext } from "../provider/AppProvider";
 import { useContext } from "react";
 
 export const Aside = () => {
-    const { viewAside, indexes } = useContext(AppContext)
-
-    const animateAside = {
-        x: viewAside ? '-110%' : '0%'
-    }
-
-    const initialAside = { x: '-110%' }
+    const { indexes } = useContext(AppContext)
 
     const [fullTimer, setFullTimer] = useState<boolean>(false)
 
@@ -25,12 +19,6 @@ export const Aside = () => {
 
     return (
         <motion.div
-            initial={initialAside}
-            animate={animateAside}
-            transition={{
-                duration: 0.5,
-                ease: 'easeInOut'
-            }}
             className={`absolute left-0 bottom-0 h-full text-[var(--light)] w-full min-w-[350px] flex gap-3`}
         >
             <AsideMenu/>
