@@ -11,13 +11,13 @@ export const AsideMenu = () => {
     const context = useContext(AppContext);
     const {indexes, handleIndexes} = context;
     return (
-        <div className={`flex relative z-8 flex-col justify-between items-center text-[15px] md:text-[25px] text-[var(--color-3)] rounded-xl pt-10 rounded-r-none`}>
+        <div className={`flex absolute z-8 flex-col justify-center gap-30 xl:gap-60 items-center text-[15px] h-full md:text-[25px] text-[var(--color-3)] rounded-xl rounded-r-none`}>
             <div>
-                <motion.ul layout className="h-full justify-center items-center inline-flex flex-col gap-3 p-2 md:p-5 ">
+                <motion.ul layout className="justify-center items-center inline-flex flex-col gap-3 p-2 md:p-5 ">
                     {firstIconList.map((icon, index) => (
                         <IconItem
                             key={icon.id}
-                            icon={icon.icon}
+                            icon={icon}
                             active={index === indexes.asidemenu}
                             onClick={() => handleIndexes('asidemenu', index)}
                             color={ACTIVE_COLORS.blue}
@@ -35,7 +35,7 @@ export const AsideMenu = () => {
                             whileHover={index === 0 ? { rotate: -360 } : {}}
                             transition={{ duration: index === 0 ? 1 : 0.3 }}
                         >
-                            {icon.icon}
+                           {icon.icon}
                         </motion.li>
                     ))}
                 </motion.ul>

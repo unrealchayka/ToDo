@@ -52,15 +52,20 @@ body {
   content: '';
   display: block;
   position: absolute;
-  z-index: 1;
+  z-index: 8;
   width: 100%;
-  height: 10%;
-  background: linear-gradient(to bottom, var(--color-2) 70%, transparent 100%);
+  height: 50px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #050505 50%, transparent 100%);
+}
+.tasks-gradient::after{
+  top: 0;
+
 }
 
 .tasks-gradient::before{
   bottom: 0;
-  background: linear-gradient(to top, var(--color-2) 70%, transparent 100%);
+  background: linear-gradient(to top, #050505 50%, transparent 100%);
 }
 
 .border-hover{

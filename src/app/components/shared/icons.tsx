@@ -19,9 +19,10 @@ import { motion } from "framer-motion";
 import { GrClearOption } from "react-icons/gr";
 import { VscScreenFull } from "react-icons/vsc";
 import { AiFillMoon } from "react-icons/ai";
+import Link from "next/link";
 
 const IconItem: React.FC<{
-    icon: React.ReactNode;
+    icon: {icon: React.ReactNode, id: string};
     active: boolean;
     onClick: () => void;
     color: string;
@@ -31,7 +32,7 @@ const IconItem: React.FC<{
         onClick={onClick}
     >
         <motion.span className={`relative z-10 transition-colors duration-700 ${active && 'text-[var(--color-1)]'}`}>
-            {icon}
+            <Link href={icon.id}>{icon.icon}</Link>
         </motion.span>
         {active && (
             <motion.div
