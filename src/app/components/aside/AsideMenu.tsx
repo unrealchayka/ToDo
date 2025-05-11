@@ -10,8 +10,9 @@ import { AppContext } from "../provider/AppProvider";
 export const AsideMenu = () => {
     const context = useContext(AppContext);
     const {indexes, handleIndexes} = context;
+   
     return (
-        <div className={`flex absolute z-8 flex-col justify-center gap-30 xl:gap-60 items-center text-[15px] h-full md:text-[25px] text-[var(--color-3)] rounded-xl rounded-r-none`}>
+        <div className={`flex absolute z-8 flex-col justify-center gap-30 xl:gap-60 items-center text-[25px] h-full md:text-[30px] text-[var(--color-3)] rounded-xl rounded-r-none`}>
             <div>
                 <motion.ul layout className="justify-center items-center inline-flex flex-col gap-3 p-2 md:p-5 ">
                     {firstIconList.map((icon, index) => (

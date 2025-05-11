@@ -47,18 +47,19 @@ export const Timer = () => {
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className={`bg-[var(--color-1)] relative w-full text-[var(--light)]  h-full z-6`}
+
         >
             <motion.div
                 className={`whitespace-nowrap bg-[var(--color-1)]  sm:border-l-2 ${borderColor} duration-1000 w-full h-full flex flex-col pt-2`}
 
             >
-                <div className='md:text-[75px] text-[55px] sm:py-10 transition-all py-3 mt-10 duration-300 text-center font-[300]'
-
+                <div className='font-[900] text-[var(--color-3)]/80 z-0 text-[50px] xl:absolute xl:top-[40%] xl:left-[40%] xl:translate-[-50%] sm:text-[10vh] xl:text-[25vw] sm:py-10 transition-all mt-10 duration-300 text-center'
+                style={{fontFamily: 'var(--font-bebas)'}}
                 >
                     {formatTime(time)}
                 </div>
 
-                <div className="flex gap-5 justify-center pb-10">
+                <div className="flex xl:absolute xl:bottom-[10%] xl:left-[40%] xl:translate-x-[-50%] xl:scale-150 z-3 gap-5 justify-center pb-10">
                     <motion.button
                         className={`px-6 py-2 text-white border-none rounded-lg cursor-pointer text-base ${isRunning ? 'bg-[#ef4444]' : 'bg-[#3b82f6]'
                             }`}
@@ -75,7 +76,7 @@ export const Timer = () => {
                         Сброс
                     </motion.button>
                 </div>
-                <div className="pt-5 w-full flex flex-col items-center gap-1 text-[17px]">
+                <div className="pt-5 xl:absolute xl:top-[50%] font-[400] xl:right-10 xl:translate-y-[-50%] flex flex-col items-center gap-1 text-[17px]">
                     <AnimatePresence mode='popLayout'>
                         {history.map((item) => (
                             <motion.div
@@ -87,7 +88,7 @@ export const Timer = () => {
                                     {history.findIndex(i => i.id === item.id) + 1}.
                                 </span>
                                 <span key={`name-{item.id}`}>Name task</span>
-                                <span className="font-[700]" key={`time-${Date.now()}`}>{item.time}</span>
+                                <span key={`time-${Date.now()}`}>{item.time}</span>
                                 <IoIosCloseCircleOutline key={`icon-${Date.now()}`}
                                     onClick={() => {
                                         setHistory(prev => prev.filter(i => i.id !== item.id))

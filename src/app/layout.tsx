@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
+import { Quicksand, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { MainWindow } from "./components/main/MainWindow";
-import { Micro_5 } from 'next/font/google'
 import { AppProvider } from "./components/provider/AppProvider";
 import GridBackground from "./components/gridBackground";
 
-const micro5 = Micro_5({
+
+const bebasNuen = Bebas_Neue({
   subsets: ['latin'],
-  weight: "400",
-  variable: '--font-pixel'
+  weight: '400',
+  variable: '--font-bebas'
 })
 
 
@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body
-        className={`${quicksand.variable} ${micro5.variable}`} 
+        className={`${quicksand.variable} ${bebasNuen.variable}`} 
         style={{fontFamily: 'var(--font-quicksand)'}}
       >  
         <GridBackground/>

@@ -9,7 +9,7 @@ export const ACTIVE_COLORS = {
 
 export const ToDoTasks: TaskCategory[] = [
     {
-      id: 'work-1',
+      id: 'work',
       title: '🖥️ Work Tasks',
       tasks: [
         {
@@ -53,7 +53,7 @@ export const ToDoTasks: TaskCategory[] = [
       ]
     },
     {
-      id: 'study-1',
+      id: 'study',
       title: '📖 Study Goals',
       tasks: [
         {
@@ -116,7 +116,7 @@ export const ToDoTasks: TaskCategory[] = [
       ]
     },
     {
-      id: 'travel-1',
+      id: 'travel',
       title: '🛫 Travel Plans',
       tasks: [
         {
@@ -208,12 +208,12 @@ export const ToDoTasks: TaskCategory[] = [
           executionDay: '2025-03-01',
           timeToComplete: '30 mins',
           priority: 'high',
-          finished: false
+          finished: true
         }
       ]
     },
     {
-      id: 'daily-1',
+      id: 'daily',
       title: '🎯 Daily To-Dos',
       tasks: [
         {
@@ -289,7 +289,7 @@ export const ToDoTasks: TaskCategory[] = [
       ]
     },
     {
-      id: 'life-1',
+      id: 'life',
       title: '🍀 Life Errands',
       tasks: [
         {
@@ -304,7 +304,7 @@ export const ToDoTasks: TaskCategory[] = [
       ]
     },
     {
-      id: 'health-1',
+      id: 'health',
       title: '💪 Health & Fitness',
       tasks: [
         {
@@ -329,7 +329,7 @@ export const ToDoTasks: TaskCategory[] = [
       ]
     },
     {
-      id: 'creative-1',
+      id: 'creative',
       title: '🎨 Creative Projects',
       tasks: [
         {

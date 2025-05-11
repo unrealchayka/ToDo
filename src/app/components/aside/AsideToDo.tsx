@@ -12,7 +12,7 @@ export interface AsideToDoMenuProps {
 }
 
 const AsideToDoMenu = ({ title, icon, color, items, indexKey }: FiltersDictionary) => {
-    const { indexes, handleIndexes } = useContext(AppContext)
+    const { indexes, handleIndexes, filterByCompletion } = useContext(AppContext)
 
     return (
         <div key={title} className="relative px-5 py-[5%] z-10">
@@ -25,7 +25,15 @@ const AsideToDoMenu = ({ title, icon, color, items, indexKey }: FiltersDictionar
                     return (
                         <motion.li
                             key={`${title}-${index}`}
-                            onClick={() => handleIndexes(indexKey as keyof Indexes, isActive ? -1 : index)}
+                            onClick={() => {
+                                handleIndexes(indexKey as keyof Indexes, isActive ? -1 : index)
+                                if(title=='Dedlines'){
+                                }
+                                else{
+                                    filterByCompletion(item.title=='Completed'? true : false)
+                                }
+                            }
+                            }
                             className="relative cursor-pointer flex justify-between w-full transition-all"
                         >
                             <span className={`flex gap-2 relative z-10 items-center transition-colors duration-600 ${isActive ? 'text-[var(--color-1)] font-[900]' : ''}`}>
@@ -50,8 +58,8 @@ const AsideToDoMenu = ({ title, icon, color, items, indexKey }: FiltersDictionar
 
 const AsideToDoTask = () => {
 
-    const { data, indexes, handleIndexes } = useContext(AppContext)
-
+    const { indexes, handleIndexes, filterByCategory,  originalTasks } = useContext(AppContext)
+    
     const dataSections =
     {
         title: 'Tasks',
@@ -61,18 +69,21 @@ const AsideToDoTask = () => {
         indexKey: 'greenIndex'
     };
     return (
-        <div key={dataSections.title} className="px-5 pt-2 overflow-y-scroll scroll-bar">
+        <div key={dataSections.title} className="px-5 pt-2 h-[20%] xl:h-auto overflow-y-scroll scroll-bar">
             
             <p className="mb-1 pt-0 flex gap-2 items-center" style={{ color: dataSections.color }}>
                 {dataSections.title} {dataSections.icon}
             </p>
             <motion.ul layout className="w-full inline-flex flex-col gap-3">
-                {data.map((item, index) => {
+                {originalTasks.map((item, index) => {
                     const isActive = index === indexes[dataSections.indexKey as keyof Indexes];
                     return (
                         <motion.li
                             key={`${dataSections.title}-${index}`}
-                            onClick={() => handleIndexes(dataSections.indexKey as keyof Indexes, isActive ? -1 : index)}
+                            onClick={() => {
+                                handleIndexes(dataSections.indexKey as keyof Indexes, isActive ? -1 : index)
+                                filterByCategory(item.title)
+                            }}
                             className="relative cursor-pointer flex justify-between w-full transition-all"
                         >
                             <span className={`flex gap-2 relative z-10 items-center transition-colors duration-600 ${isActive ? 'text-[var(--color-1)] font-[900]' : ''}`}>
@@ -95,7 +106,7 @@ const AsideToDoTask = () => {
 }
 
 export const AsideToDo = () => {
-    const { clearIndexes, borderColor } = useContext(AppContext)
+    const { clearIndexes, borderColor, resetFilters } = useContext(AppContext)
 
     const dedlines: FiltersDictionary = {
         title: 'Dedlines',
@@ -114,7 +125,6 @@ export const AsideToDo = () => {
         icon: <TbFilters />,
         color: ACTIVE_COLORS.purple,
         items: [
-            { title: 'This Week', icon: <BsCalendarWeek />, count: '44' },
             { title: 'Unfinished', icon: <FaExclamationTriangle />, count: '6' },
             { title: 'Completed', icon: <CgCheckO />, count: '60' }
         ],
@@ -128,10 +138,15 @@ return (
             <AsideToDoTask />
             <AsideToDoMenu {...filters} />
             <motion.div
-                onClick={clearIndexes}
+                onClick={()=>{
+                    clearIndexes()
+                    resetFilters()
+                }}
                 className="text-[--light] bottom-10 left-[30%] px-5 pt-5 flex justify-start gap-5 items-center cursor-pointer z-5 text-center w-full"
             >
-                <span className="w-8 h-8 flex justify-center  text-[var(--dark)] items-center bg-[var(--color-7)] text-[20px] rounded-full">
+                <span 
+
+                    className="w-8 h-8 flex justify-center  text-[var(--dark)] items-center bg-[var(--color-7)] text-[20px] rounded-full">
                     <GrClearOption />
                 </span>
                 Clear Filtres

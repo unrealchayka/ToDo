@@ -7,21 +7,25 @@ import { ANIMATION } from "../components/shared/animations";
 export default function note () {
   return (
       <motion.div
-      className="hidden md:flex justify-between gap-3 w-full"
+      className="relative flex justify-between gap-3 w-full h-full"
       {...ANIMATION.slide}
-    >
-      <motion.div
-        key="Aside"
-        layoutId="Aside"
-        className={`w-[20%] sm:w-[25%] z-5`}>
-        <Aside />
-      </motion.div>
-      <motion.div
-        key="DertailTask"
-        layoutId="DertailTask"
-        className={`w-[30%] sm:w-[60%] xl:w-[70%] py-5`}>
-        <DertailTask />
-      </motion.div>
+      > 
+
+      {/* md: device > */}
+        <motion.div
+          key="Aside"
+          layoutId="Aside"
+          className={`hidden lg:block w-[20%] sm:w-[25%] z-5`}>
+          <Aside />
+        </motion.div>
+        <motion.div
+          key="DertailTask"
+          layoutId="DertailTask"
+          className={`hidden lg:block w-[30%] sm:w-[60%] xl:w-[70%] py-5`}>
+          <DertailTask />
+        </motion.div>
+      {/* md: device end */}
+
     </motion.div>
   );
 }

@@ -11,4 +11,5 @@ export const ANIMATION = {
     exit: { opacity: 0},
     transition: { duration: 0.3 }
   }
+  
 };
