@@ -12,9 +12,9 @@ export const AsideMenu = () => {
     const {indexes, handleIndexes} = context;
    
     return (
-        <div className={`flex absolute z-8 flex-col justify-center gap-30 xl:gap-60 items-center text-[25px] h-full md:text-[30px] text-[var(--color-3)] rounded-xl rounded-r-none`}>
+        <div className={`flex absolute bottom-2 z-8 sm:flex-col w-full sm:w-auto justify-center sm:gap-30 xl:gap-60 items-center text-[25px] sm:h-full md:text-[30px] text-[var(--color-3)] rounded-xl rounded-r-none`}>
             <div>
-                <motion.ul layout className="justify-center items-center inline-flex flex-col gap-3 p-2 md:p-5 ">
+                <motion.ul layout className="justify-center items-center inline-flex sm:flex-col gap-3 p-2 md:p-5 ">
                     {firstIconList.map((icon, index) => (
                         <IconItem
                             key={icon.id}
@@ -28,7 +28,7 @@ export const AsideMenu = () => {
             </div>
 
             <div>
-                <motion.ul layout className="h-full text-[18px] inline-flex flex-col gap-3 p-2 pb-4 md:p-5">
+                <motion.ul layout className="hidden h-full text-[18px] sm:inline-flex items-center sm:flex-col gap-3 p-2 sm:pb-4 md:p-5">
                     {secondIconList.map((icon, index) => (
                         <motion.li
                             key={icon.id}

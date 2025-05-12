@@ -37,7 +37,7 @@ const IconItem: React.FC<{
         {active && (
             <motion.div
                 layoutId="activeIndicator"
-                className={`bg-[var(--color-5)] z-0 w-5 h-5 sm:w-10 sm:h-10 top-[50%] left-[50%] translate-[-50%] rounded-full absolute`}
+                className={`bg-[var(--color-5)] z-0 w-10 h-10 sm:w-10 sm:h-10 top-[50%] left-[50%] translate-[-50%] rounded-full absolute`}
             />
         )}
     </motion.li>

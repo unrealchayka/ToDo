@@ -53,7 +53,7 @@ export const Timer = () => {
                 className={`whitespace-nowrap bg-[var(--color-1)]  sm:border-l-2 ${borderColor} duration-1000 w-full h-full flex flex-col pt-2`}
 
             >
-                <div className='font-[900] text-[var(--color-3)]/80 z-0 text-[50px] xl:absolute xl:top-[40%] xl:left-[40%] xl:translate-[-50%] sm:text-[10vh] xl:text-[25vw] sm:py-10 transition-all mt-10 duration-300 text-center'
+                <div className='font-[900] text-[var(--color-3)]/80 z-0 text-[80px] lg:text-[150px] xl:absolute xl:top-[40%] xl:left-[40%] xl:translate-[-50%] sm:text-[20vh] xl:text-[25vw] sm:py-10 transition-all mt-10 duration-300 text-center'
                 style={{fontFamily: 'var(--font-bebas)'}}
                 >
                     {formatTime(time)}
