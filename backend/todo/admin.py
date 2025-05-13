@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from todo.models import Category, TodoTask, Tag, TaskComment, TaskAttachment
+from .models import Category, TodoTask, Tag, TaskComment, TaskAttachment
 from django.utils.html import format_html
 
 class CategoryAdmin(admin.ModelAdmin):

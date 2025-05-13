@@ -4,7 +4,10 @@ backend/.env
 backend/*/migrations/
 backend/db.sqlite3
 backend/__pycache__/
-
+backend/static
+backend/staticfiles
+/static
+/staticfiles
 # Next.js
 frontend/.next/
 frontend/node_modules/
