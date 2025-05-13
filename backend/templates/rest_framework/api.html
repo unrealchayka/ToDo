@@ -1,0 +1,15 @@
+{% extends "rest_framework/base.html" %}
+
+{% block branding %}
+    <a class='navbar-brand' style="color: rgb(0, 208, 255);" href="{% url 'home' %}">
+        <i class="fas fa-home"></i> На главную
+    </a>
+    {{ block.super }}
+{% endblock %}
+
+{% block userlinks %}
+    <a href="{% url 'home' %}" class="btn btn-link">
+        <i class="fas fa-home"></i> Главная
+    </a>
+    {{ block.super }}
+{% endblock %}
