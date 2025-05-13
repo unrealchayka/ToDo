@@ -26,6 +26,7 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
 
-    'todo',
+    'todo.apps.TodoConfig',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,38 @@ SIMPLE_JWT = {
 
 ROOT_URLCONF = 'config.urls'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'todo/static'),
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+JAZZMIN_SETTINGS = {
+    "site_title": "NOTE",
+    "site_header": "Admin",
+    "site_brand": "NOTE",
+    "site_logo": "todo/img/note.svg",
+    "login_logo": "todo/img/note.svg",
+    "site_icon": "todo/img/note.svg",
+    "site_logo_classes": "img",
+    "welcome_sign": "Добро пожаловать в админку NOTE Todo!",
+    "show_ui_builder": True,
+    "navigation_expanded": True,
+    
+    "topmenu_links": [
+        {"name": "Главная", "url": "admin:index"},
+        {"app": "todo"},
+    ],
+    "theme": "cyborg",  # Устаревший параметр (для версий <3.0)
+    "dark_mode_theme": "cyborg",  # Актуальный параметр
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "cyborg",  # Альтернативный вариант
+    "dark_mode_theme": "cyborg",  # Дублирование для надежности
+}
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -116,7 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
