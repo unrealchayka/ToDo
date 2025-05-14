@@ -5,9 +5,11 @@ import { AppContext } from '../provider/AppProvider'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CgCheckO, FaExclamationTriangle } from '../shared/icons'
 import { ANIMATION } from '../shared/animations'
+import { useTasks } from '@/app/hooks/useTasks'
 
 
 export const DertailTask = () => {
+    const { data: data, isLoading, error } = useTasks()
     const context = useContext(AppContext)
     const { filteredTasks } = context
     return (
@@ -16,7 +18,7 @@ export const DertailTask = () => {
             <motion.div className='overflow-y-scroll overflow-x-hidden task-scroll-bar py-10 w-full flex flex-col gap-10'>
                 <h1 className='text-[50px] font-[700]'>Tasks Lists</h1>
                 <AnimatePresence mode='wait'>
-                    {filteredTasks.map((item) => {
+                    {data?.map((item) => {
                         return (
                             <motion.div
                                 layoutId={item.title}
