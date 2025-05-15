@@ -4,6 +4,7 @@ import "./globals.css";
 import { MainWindow } from "./components/main/MainWindow";
 import { AppProvider } from "./components/provider/AppProvider";
 import GridBackground from "./components/gridBackground";
+import AuthGuard from "./components/AuthGuard";
 
 
 const bebasNuen = Bebas_Neue({
@@ -44,7 +45,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="ru">
       <body
@@ -55,7 +55,7 @@ export default function RootLayout({
         <AppProvider className="m-auto sm:p-3 overflow-hidden h-screen border">
           <div className={`container m-auto relative h-full border`}>
             <MainWindow>
-              {children}
+              <AuthGuard>{children}</AuthGuard>
             </MainWindow>
           </div>
         </AppProvider>

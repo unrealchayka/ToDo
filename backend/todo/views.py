@@ -24,17 +24,8 @@ class HomeView(View):
     def get(self, request):
         context = {}
         if request.user.is_authenticated:
-            try:
-                # Удаляем старый токен, если существует
-                Token.objects.filter(user=request.user).delete()
-                # Создаем новый токен
-                token = Token.objects.create(user=request.user)
-                context['api_token'] = token.key
-            except Exception as e:
-                # Логирование ошибки
-                print(f"Error creating token: {e}")
-                context['token_error'] = "Не удалось создать токен доступа"
-        
+            token, created = Token.objects.get_or_create(user=request.user)
+            context['api_token'] = token.key
         return render(request, 'index.html', context)
 
 class CategoryViewSet(viewsets.ModelViewSet):
