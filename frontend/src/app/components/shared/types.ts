@@ -34,13 +34,45 @@ export interface AsideProps {
     clearIndexes?: () => void;
 
 }
+interface Tag{
+    id: number;
+    title: string;
+}
+
+interface UserData {
+    username: string;
+    email: string;
+    user_id: number;
+}
+interface Comments{
+    id: number;
+    author: UserData;
+    text: string;
+    created_at: string;
+    updated_at: string;
+}
+
+interface Attachments{
+    id: number;
+    file: string;
+    uploaded_by: UserData;
+    uploaded_at: string;
+}
 
 export interface Task {
-    id: string;
+    id: number;
     title: string;
-    dateTimeCreated: string;
-    executionDay: string;
+    description: string
+    completed: boolean
+    created_at: string;
+    updated_at: string;
+    due_date: string;
     timeToComplete: string;
+    category?: string | null;
+    tags?: Tag[] | null;
+    user: UserData;
+    comments: Comments;
+    attachments:Attachments;
     priority: 'low' | 'medium' | 'high';
     finished: boolean;
     notes?: string;

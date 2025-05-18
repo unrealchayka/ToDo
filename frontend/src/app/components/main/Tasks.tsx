@@ -1,24 +1,23 @@
 'use client'
-import React from 'react'
-import { useContext } from 'react'
-import { AppContext } from '../provider/AppProvider'
+import React, { Dispatch, SetStateAction } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CgCheckO, FaExclamationTriangle } from '../shared/icons'
 import { ANIMATION } from '../shared/animations'
-import { useTasks } from '@/app/hooks/useTasks'
+import { Task } from '../shared/types'
 
 
-export const DertailTask = () => {
-    const { data: data, isLoading, error } = useTasks()
-    const context = useContext(AppContext)
-    const { filteredTasks } = context
+export const Tasks = (
+    {tasks, setTask}: 
+    {
+        tasks: Task[] | undefined; 
+        setTask: Dispatch<SetStateAction<Task[] | undefined>>
+    }) => {
     return (
         <motion.div
             className='flex flex-col text-[12px] sm:text-[16px] md:text-[20px] z-3 h-full overflow-y-auto w-full text-[var(--light)]'>
             <motion.div className='overflow-y-scroll overflow-x-hidden task-scroll-bar py-10 w-full flex flex-col gap-10'>
                 <h1 className='text-[50px] font-[700]'>Tasks Lists</h1>
                 <AnimatePresence mode='wait'>
-                    {data?.map((item) => {
+                    {tasks?.map((item) => {
                         return (
                             <motion.div
                                 layoutId={item.title}
@@ -32,7 +31,7 @@ export const DertailTask = () => {
                                 <motion.div
                                     key={`item-${item.id}`}
                                     className='py-10'>
-                                    {item.tasks.map((task) => {
+                                    {/* {item.tasks.map((task) => {
                                         return (
                                             <motion.div
                                                 className={`${task.finished&& 'opacity-45'} px-5 ml-10 border-b flex justify-between items-center mb-3`}
@@ -49,7 +48,7 @@ export const DertailTask = () => {
                                                 </motion.div>
                                             </motion.div>
                                         )
-                                    })}
+                                    })} */}
                                 </motion.div>
                             </motion.div>
                         )

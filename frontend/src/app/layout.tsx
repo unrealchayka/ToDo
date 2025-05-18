@@ -5,6 +5,7 @@ import { MainWindow } from "./components/main/MainWindow";
 import { AppProvider } from "./components/provider/AppProvider";
 import GridBackground from "./components/gridBackground";
 import AuthGuard from "./components/AuthGuard";
+import { verify } from "./components/api/auth";
 
 
 const bebasNuen = Bebas_Neue({
@@ -45,6 +46,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  console.log(verify())
+
+
   return (
     <html lang="ru">
       <body

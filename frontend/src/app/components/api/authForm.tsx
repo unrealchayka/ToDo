@@ -20,7 +20,7 @@ export default function AuthForm({ mode }: { mode: 'login' | 'register' }) {
         setError('')
 
         try {
-            const url = 'http://127.0.0.1:8000/api/v1/token/'
+            const url = 'http://127.0.0.1:8000/api/token/'
             
             const response = await fetch(url, {
                 method: 'POST',

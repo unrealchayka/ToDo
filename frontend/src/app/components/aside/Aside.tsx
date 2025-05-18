@@ -2,9 +2,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { AsideToDo } from "./AsideToDo";
 import { AppContext } from "../provider/AppProvider";
-import { useContext } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
+import { Task } from "../shared/types";
 
-export const Aside = () => {
+export const Aside = (
+    {tasks, setTask}: 
+    {
+        tasks: Task[] | undefined; 
+        setTask: Dispatch<SetStateAction<Task[] | undefined>>
+    }) => {
     const { indexes } = useContext(AppContext)
 
     return (
@@ -16,7 +22,7 @@ export const Aside = () => {
                         key="ToDo"
                         className={`overflow-hidden  w-full bg-[var(--color-1)] md:pl-15 h-full ${indexes.asidemenu === 0? 'z-7': 'z-0'}`}
                     >
-                        <AsideToDo/>
+                        <AsideToDo tasks={tasks}/>
                         
                     </motion.div>
             </AnimatePresence>

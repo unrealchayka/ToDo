@@ -1,28 +1,38 @@
 'use client'
-import { useEffect } from 'react'
-import { usePathname, useRouter,} from 'next/navigation'
-import { fetchUserProfile } from './api/auth'
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { verify } from './api/auth'
+import AuthForm from './api/authForm'
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const pathname = usePathname()
-  const token = fetchUserProfile()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
 
   useEffect(() => {
-    const verifyAuth = async () => {
+    const checkAuth = async () => {
       try {
-        // const isAuthenticated = await checkAuth()
-        if (pathname !== '/login') {
-          router.push(`/login?from=${encodeURIComponent(pathname)}`)
+        const isValid = await verify()
+        setIsAuthenticated(isValid)
+
+        if (!isValid) {
+          router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
         }
       } catch (error) {
-        router.push(`/login?from=${encodeURIComponent(pathname)}`)
+        console.error('Auth check failed:', error)
+        router.push(`/login?redirect=${encodeURIComponent(pathname)}`)
       }
     }
 
-    verifyAuth()
+    checkAuth()
   }, [pathname, router])
 
-  return <>{children}</>
-}
+  return (<>
+    {
+      isAuthenticated ? <>{children}</> : <AuthForm mode='login' />
+    }
+  </>)
 
+
+
+}

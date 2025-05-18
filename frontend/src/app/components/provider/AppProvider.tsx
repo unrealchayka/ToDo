@@ -98,15 +98,7 @@ export const AppProvider = memo(({ children, className }: { children: React.Reac
         case 'month': endDate.setMonth(today.getMonth() + 1); break;
       }
 
-      result = result
-        .map(category => ({
-          ...category,
-          tasks: category.tasks.filter(task => {
-            const taskDate = new Date(task.executionDay);
-            return taskDate >= today && taskDate <= endDate;
-          })
-        }))
-        .filter(category => category.tasks.length > 0);
+     
     }
 
     if (filters.category) {

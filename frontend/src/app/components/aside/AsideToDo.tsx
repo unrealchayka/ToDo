@@ -1,5 +1,5 @@
 'use client'
-import { FiltersDictionary, Indexes } from "../shared/types";
+import { FiltersDictionary, Indexes, Task } from "../shared/types";
 import { ACTIVE_COLORS } from "../shared/constants";
 import { RiTimerFlashLine, BsCalendarDay, BsCalendarWeek, IoCalendarNumberOutline, FaBoxArchive, VscListSelection, TbFilters, FaExclamationTriangle, CgCheckO, GrClearOption } from '../shared/icons'
 import { motion } from "framer-motion";
@@ -56,7 +56,10 @@ const AsideToDoMenu = ({ title, icon, color, items, indexKey }: FiltersDictionar
 }
 
 
-const AsideToDoTask = () => {
+const AsideToDoTask = ({tasks}: 
+    {
+        tasks: Task[] | undefined; 
+    }) => {
 
     const { indexes, handleIndexes, filterByCategory,  originalTasks } = useContext(AppContext)
     
@@ -75,7 +78,7 @@ const AsideToDoTask = () => {
                 {dataSections.title} {dataSections.icon}
             </p>
             <motion.ul layout className="w-full inline-flex flex-col gap-3">
-                {originalTasks.map((item, index) => {
+                {tasks?.map((item, index) => {
                     const isActive = index === indexes[dataSections.indexKey as keyof Indexes];
                     return (
                         <motion.li
@@ -89,7 +92,7 @@ const AsideToDoTask = () => {
                             <span className={`flex gap-2 relative z-10 items-center transition-colors duration-600 ${isActive ? 'text-[var(--color-1)] font-[900]' : ''}`}>
                                 {item.title}
                             </span>
-                            <span className="relative z-10">{item.tasks.length}</span>
+                            {/* <span className="relative z-10">{item.tasks.length}</span> */}
                             {isActive && (
                                 <motion.div
                                     layoutId={`${dataSections.indexKey}Indicator`}
@@ -105,7 +108,10 @@ const AsideToDoTask = () => {
     )
 }
 
-export const AsideToDo = () => {
+export const AsideToDo = ({tasks}: 
+    {
+        tasks: Task[] | undefined; 
+    }) => {
     const { clearIndexes, borderColor, resetFilters } = useContext(AppContext)
 
     const dedlines: FiltersDictionary = {
@@ -135,7 +141,7 @@ return (
         <motion.div className={`z-1 absolute md:relative  text-[13px] sm:border-r-2 ${borderColor} duration-1000 sm:text-[18px] whitespace-nowrap flex flex-col pt-10 gap-2 3xl:gap-8 w-full h-full`}>
             
             <AsideToDoMenu  {...dedlines} />
-            <AsideToDoTask />
+            <AsideToDoTask tasks={tasks} />
             <AsideToDoMenu {...filters} />
             <motion.div
                 onClick={()=>{
