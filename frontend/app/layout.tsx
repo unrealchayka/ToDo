@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Nunito, Raleway } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
 
 const nunito = Nunito({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '700', '900'],
   display: 'swap',
 })
+
+const raleway = Raleway({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['700'], // Укажите нужные начертания
+  variable: '--font-raleway', // (опционально) для использования CSS-переменной
+});
 
 
 export const metadata: Metadata = {
@@ -23,8 +29,7 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <body
-        className={`${nunito.className}  antialiased`}
-        style={{fontFamily: 'var(--font-nunito)'}}
+        className={`${nunito.className}  ${raleway.className} antialiased max-w-screen`}
       >
         <ThemeProvider
         attribute="class"

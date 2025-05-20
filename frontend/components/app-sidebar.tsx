@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import {
   AudioWaveform,
   Blocks,
@@ -48,14 +49,9 @@ const data = {
   ],
   navMain: [
     {
-      title: "Search",
+      title: "ToDay",
       url: "#",
       icon: Search,
-    },
-    {
-      title: "Ask AI",
-      url: "#",
-      icon: Sparkles,
     },
     {
       title: "Home",
@@ -262,7 +258,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <Image className="ml-2 mt-2" src='/note.svg' width={100} height={50} alt="note"/>
         <NavMain items={data.navMain} />
       </SidebarHeader>
       <SidebarContent>

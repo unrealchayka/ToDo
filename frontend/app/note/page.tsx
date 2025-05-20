@@ -13,6 +13,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { DataTableDemo } from "@/components/ui/dataTable"
+import Link from "next/link"
 
 export default function Page() {
   return (
@@ -36,21 +37,20 @@ export default function Page() {
               </BreadcrumbList>
             </Breadcrumb>
           </div>
-          <div>
-            <ul className="flex text-[15px] md:text-[22px] gap-2 md:gap-5">
-              <li>Home</li>
-              <li>Dashboard</li>
-              <li>Profile</li>
-              <li>Blog</li>
+          <div className="flex justify-between items-center py-3">
+            <ul className="flex text-[12px] sm:text-[15px] md:text-[18px] gap-2 md:gap-5">
+              <li className="hover:text-blue-500 transition-colors duration-300"><Link href='/'>Home</Link></li>
+              <li className="hover:text-blue-500 transition-colors duration-300"><Link href='/note'>Note Dashboard</Link></li>
+              <li className="hover:text-blue-500 transition-colors duration-300"><Link href='/profile'>Profile</Link></li>
             </ul>
           </div>
           <div className="ml-auto px-3">
             <ModeToggle />
           </div>
         </header>
-        <div className="m-auto px-3 mt-10 py-5 md:mx-[5%] md:px-10 border rounded-xl md:py-10">
-
-        <DataTableDemo/>
+        <div className="px-3 py-5 m-auto w-[98%] sm:mx-5 sm:px-5 sm:mt-10 border rounded-xl">
+          <h2 className="text-[20px] md:text-[45px] pt-3 font-[700] md:pl-10 md:pb-5" style={{ fontFamily: 'var(--font-raleway)' }}>Note dashboard</h2>
+          <DataTableDemo />
 
         </div>
       </SidebarInset>
