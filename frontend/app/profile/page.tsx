@@ -9,11 +9,11 @@ export default function Home() {
         <Navigation/>
       </div>
       <h1 className="
-          text-shadow-green
+          text-shadow-red
           relative left-[10%] top-[10%] w-[50%] font-[900] uppercase text-[20px] 
           sm:text-[30px] md:text-[55px] transition-all duration-300
       ">
-        Home page
+        Profile page
       </h1>
     </div>
   );

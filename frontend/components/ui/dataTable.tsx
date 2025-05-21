@@ -13,7 +13,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, ChevronDown, MoreHorizontal, CircleArrowRight  } from "lucide-react"
+import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -41,210 +42,210 @@ const data: Payment[] = [
       id: "m5gr84i9evroeajp",
       date: '21-05-2025',
       category: {title: 'Work', color: '#4dff00'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Complete project documentation"
     },
     {
       id: "3u1reuv4lklml",
       date: '18-05-2025',
       category: {title: 'Personal', color: '#0091ff'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Review team progress"
     },
     {
       id: "derv1ws0vsdfsdt",
       date: '12-05-2025',
       category: {title: 'Shopping', color: '#ff8800'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Buy office supplies"
     },
     {
       id: "5kma53aecasrt",
       date: '09-05-2025',
       category: {title: 'Health', color: '#8c00ff'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Schedule doctor appointment"
     },
     {
       id: "bhqecj4pdf5",
       date: '28-04-2025',
       category: {title: 'Finance', color: 'red'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Pay monthly bills"
     },
     {
       id: "derv1ws0asdsa",
       date: '25-04-2025',
       category: {title: 'Education', color: '#00ffd5'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Read new research paper"
     },
     {
       id: "5kma53aewersd",
       date: '22-04-2025',
       category: {title: 'Work', color: '#4dff00'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Prepare client presentation"
     },
     {
       id: "bhqecj4pvmghd",
       date: '19-04-2025',
       category: {title: 'Personal', color: '#0091ff'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Organize personal files"
     },
     {
       id: "derv1ws0qwe",
       date: '15-04-2025',
       category: {title: 'Shopping', color: '#ff8800'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Order new laptop"
     },
     {
       id: "5kma53aegdsf",
       date: '11-04-2025',
       category: {title: 'Health', color: '#8c00ff'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Renew gym membership"
     },
     {
       id: "bhqecj4p123",
       date: '08-04-2025',
       category: {title: 'Finance', color: '#ff0033'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Review investment portfolio"
     },
     {
       id: "m5gr84i9evroeajq",
       date: '05-04-2025',
       category: {title: 'Education', color: '#00ffd5'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Learn new framework"
     },
     {
       id: "3u1reuv4lklmm",
       date: '02-04-2025',
       category: {title: 'Work', color: '#4dff00'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Write technical documentation"
     },
     {
       id: "derv1ws0vsdfsdu",
       date: '30-03-2025',
       category: {title: 'Personal', color: '#0091ff'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Plan weekend activities"
     },
     {
       id: "5kma53aecasru",
       date: '27-03-2025',
       category: {title: 'Shopping', color: '#ff8800'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Purchase new headphones"
     },
     {
       id: "bhqecj4pdf6",
       date: '24-03-2025',
       category: {title: 'Health', color: '#8c00ff'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Start new fitness routine"
     },
     {
       id: "derv1ws0asdsb",
       date: '21-03-2025',
       category: {title: 'Finance', color: '#ff0033'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "File tax returns"
     },
     {
       id: "5kma53aewerse",
       date: '18-03-2025',
       category: {title: 'Education', color: '#00ffd5'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Complete online course"
     },
     {
       id: "bhqecj4pvmghf",
       date: '15-03-2025',
       category: {title: 'Work', color: '#4dff00'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Debug production issue"
     },
     {
       id: "derv1ws0qwf",
       date: '12-03-2025',
       category: {title: 'Personal', color: '#0091ff'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Organize family gathering"
     },
     {
       id: "5kma53aegdsg",
       date: '09-03-2025',
       category: {title: 'Shopping', color: '#ff8800'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Buy birthday gift"
     },
     {
       id: "bhqecj4p124",
       date: '06-03-2025',
       category: {title: 'Health', color: '#8c00ff'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Schedule dental checkup"
     },
     {
       id: "m5gr84i9evroeajr",
       date: '03-03-2025',
       category: {title: 'Finance', color: '#ff0033'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Create monthly budget"
     },
     {
       id: "3u1reuv4lklmn",
       date: '28-02-2025',
       category: {title: 'Education', color: '#00ffd5'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Practice coding challenges"
     },
     {
       id: "derv1ws0vsfsdt",
       date: '25-02-2025',
       category: {title: 'Work', color: '#4dff00'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Deploy new feature"
     },
     {
       id: "5kma53aecasrv",
       date: '22-02-2025',
       category: {title: 'Personal', color: '#0091ff'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Backup personal data"
     },
     {
       id: "bhqecj4pdf7",
       date: '19-02-2025',
       category: {title: 'Shopping', color: '#ff8800'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Order groceries online"
     },
     {
       id: "derv1ws0asdsc",
       date: '16-02-2025',
       category: {title: 'Health', color: '#8c00ff'},
-      status: "high",
+      status: {title: "high", color: 'red'},
       title: "Research healthy recipes"
     },
     {
       id: "5kma53aewersf",
       date: '13-02-2025',
       category: {title: 'Finance', color: '#ff0033'},
-      status: "medium",
+      status: {title: "medium", color: '#ff8800'},
       title: "Review bank statements"
     },
     {
       id: "bhqecj4pvmghg",
       date: '10-02-2025',
       category: {title: 'Education', color: '#00ffd5'},
-      status: "low",
+      status: {title: "low", color: '#4dff00'},
       title: "Read technical book"
     }
   ]
@@ -253,7 +254,7 @@ export type Payment = {
   id: string
   date: string
   category: {title: string, color: string}
-  status: "low" | "medium" | "high"
+  status: {title: "low" | "medium" | "high", color: string}
   title: string
 }
 
@@ -283,9 +284,12 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
+    cell: ({ row }) => {
+      const status = row.getValue("status") as { title: string; color: string }; 
+      return(
+        <div className="capitalize flex items-center gap-3"><div className="w-3 h-3 rounded-full" style={{background: status.color}}></div>{status.title}</div>
+      )
+    },
   },
   {
     accessorKey: "title",
@@ -301,7 +305,7 @@ export const columns: ColumnDef<Payment>[] = [
         </Button>
       )
     },
-    cell: ({ row }) => <div className=" relative left-[50%] translate-x-[-50%]">{row.getValue("title")}</div>,
+    cell: ({ row }) => <div className="relative left-[50%] translate-x-[-50%]">{row.getValue("title")}</div>,
   },
 
   {
@@ -353,6 +357,13 @@ export const columns: ColumnDef<Payment>[] = [
       )
     },
   },
+  {
+    accessorKey: "detail",
+    header: () => <></>,
+    cell: () => {
+      return <Link href="#" className='flex justify-end w-[25px] hover:text-blue-700 transition-colors duration-300'><CircleArrowRight/></Link>
+    },
+  },
 ]
 
 export function DataTableDemo() {
@@ -384,7 +395,7 @@ export function DataTableDemo() {
   })
 
   return (
-    <div className="w-full">
+    <div className='w-full'>
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter titles..."
@@ -421,7 +432,7 @@ export function DataTableDemo() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-hidden">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
