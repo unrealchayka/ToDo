@@ -8,7 +8,7 @@ User = get_user_model()
 class Category(models.Model):
     """Категории для группировки задач"""
     name = models.CharField(_("Название"), max_length=100, unique=True)
-    color = models.CharField(_("Цвет"), max_length=7, default='#FFFFFF')  # HEX формат
+    color = models.CharField(_("Цвет"), max_length=7, default='#FFFFFF')
     icon = models.CharField(_("Иконка"), max_length=50, blank=True)
     user = models.ForeignKey(
         User,
@@ -21,7 +21,7 @@ class Category(models.Model):
         verbose_name = _("Категория")
         verbose_name_plural = _("Категории")
         ordering = ['name']
-        unique_together = ['name', 'user']  # Уникальное название для каждого пользователя
+        unique_together = ['name', 'user']
 
     def __str__(self):
         return self.name
@@ -154,3 +154,16 @@ class TaskAttachment(models.Model):
 
     def __str__(self):
         return f"Вложение {self.file.name} к задаче {self.task.id}"
+    
+
+class Project(models.Model):
+    title = models.CharField(_("Заголовок"), max_length=200)
+    description = models.TextField(_("Описание"), blank=True)
+    tasks = models.ManyToManyField(TodoTask, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
+    class Meta:
+        verbose_name = _("Проект")
+        verbose_name_plural = _("Проекты")
+
+    def __str__(self):
+        return f"{self.title}"

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import Category, TodoTask, Tag, TaskComment, TaskAttachment
+from .models import Category, TodoTask, Tag, TaskComment, TaskAttachment, Project
 from django.utils.html import format_html
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -51,6 +51,11 @@ class TodoTaskAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     filter_horizontal = ('tags',)
 
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug',)
+    search_fields = ('title', 'description')
+    prepopulated_fields = {'slug' : ('title',)}
+
 class TaskCommentAdmin(admin.ModelAdmin):
     list_display = ('task', 'author', 'created_at', 'short_text')
     list_filter = ('author', 'created_at')
@@ -68,6 +73,7 @@ class TaskAttachmentAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(Project, ProjectAdmin)
 admin.site.register(TodoTask, TodoTaskAdmin)
 admin.site.register(TaskComment, TaskCommentAdmin)
 admin.site.register(TaskAttachment, TaskAttachmentAdmin)
