@@ -20,7 +20,6 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = [
     "*",  # Для теста (не для продакшена!)
     ".railway.app",
-    "todo.up.railway.app"
 ]
 
 CORS_ALLOWED_ORIGINS = [
