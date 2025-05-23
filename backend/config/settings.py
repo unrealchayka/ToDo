@@ -17,7 +17,11 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 DEBUG = True
 CORS_ALLOW_CREDENTIALS = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*",  # Для теста (не для продакшена!)
+    ".railway.app",
+    "ваш-проект.up.railway.app"
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Ваш Next.js адрес
