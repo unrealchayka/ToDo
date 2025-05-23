@@ -16,6 +16,13 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = ['https://django-server-production-f8d3.up.railway.app/']
+
+# Для HTTPS (обязательно на Railway)
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
 
 ALLOWED_HOSTS = [
     "*",  # Для теста (не для продакшена!)
