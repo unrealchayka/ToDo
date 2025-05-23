@@ -7,7 +7,7 @@
     "deploy": {
       "runtime": "V2",
       "numReplicas": 1,
-      "startCommand": "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn mysite.wsgi",
+      "startCommand": "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn mysite.wsgi",
       "sleepApplication": false,
       "multiRegionConfig": {
         "europe-west4-drams3a": {
