@@ -21,27 +21,25 @@ ALLOWED_HOSTS = [
 ]  # Убраны лишние символы
 
 # CSRF и куки
-CSRF_TRUSTED_ORIGINS = [
-    'https://carefree-reflection-production-feae.up.railway.app',
-    'https://*.railway.app'
-]  # Убраны слеши в конце
+CSRF_TRUSTED_ORIGINS = ['https://carefree-reflection-production-feae.up.railway.app']  # Убраны слеши в конце
 
 CSRF_COOKIE_DOMAIN = None  # Важно! Не используйте .railway.app для кук
 # Сессии
-SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_DOMAIN = None  # Аналогично CSRF
-
-SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Используем БД для сессий
+# Security
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'Lax'
 
+# Static files
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Важно для Railway
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # CORS (если используете API)
 CORS_ALLOWED_ORIGINS = [
     'https://carefree-reflection-production-feae.up.railway.app',
+    "http://localhost:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -50,13 +48,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 31536000 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Ваш Next.js адрес
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
-]
 
 # Application definition
 
@@ -233,7 +224,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
