@@ -20,33 +20,9 @@ ALLOWED_HOSTS = [
     '.railway.app',
 ]  # Убраны лишние символы
 
-# CSRF и куки
-CSRF_TRUSTED_ORIGINS = ['https://todo-production-cc3d.up.railway.app']  # Убраны слеши в конце
 
-CSRF_COOKIE_DOMAIN = None  # Важно! Не используйте .railway.app для кук
-# Сессии
-SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_DOMAIN = None  # Аналогично CSRF
-# Security
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Важно для Railway
-
-# CORS (если используете API)
-CORS_ALLOWED_ORIGINS = [
-    'https://todo-production-cc3d.up.railway.app',
-    "http://localhost:3000",
-]
-CORS_ALLOW_CREDENTIALS = True
-
-# Прокси и HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 31536000 
 
 
 # Application definition
@@ -58,7 +34,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
 
     'rest_framework',
@@ -83,11 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -165,14 +136,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 print(DATABASES)
 
