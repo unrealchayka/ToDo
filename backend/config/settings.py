@@ -164,21 +164,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("PGDATABASE", "railway"),
-        "USER": os.getenv("PGUSER", "postgres"),
-        "PASSWORD": os.getenv("PGPASSWORD"),
-        "HOST": os.getenv("RAILWAY_TCP_PROXY_DOMAIN"),  # Используем публичный хост
-        "PORT": os.getenv("RAILWAY_TCP_PROXY_PORT"),
-        "OPTIONS": {
-            "sslmode": "require",  # Обязательно для Railway
-            "sslrootcert": os.path.join(BASE_DIR, "prod-ca-2021.crt")  # Если требуется
-        }
-    }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Не обязательно, если DATABASE_URL содержит эту информацию
+        'NAME': os.environ.get('DATABASE_NAME'),  # Доступ к имени базы данных
+        'USER': os.environ.get('DATABASE_USER'),  # Доступ к имени пользователя
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),  # Доступ к паролю
+        'HOST': os.environ.get('DATABASE_HOST'),  # Доступ к хосту
+        'PORT': os.environ.get('DATABASE_PORT'),  # Доступ к порту
+    },
 }
+
 print(os.getenv('DATABASE_URL'))
 
 
