@@ -166,17 +166,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Не обязательно, если DATABASE_URL содержит эту информацию
-        'NAME': os.environ.get('DATABASE_NAME'),  # Доступ к имени базы данных
-        'USER': os.environ.get('DATABASE_USER'),  # Доступ к имени пользователя
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),  # Доступ к паролю
-        'HOST': os.environ.get('DATABASE_HOST'),  # Доступ к хосту
-        'PORT': os.environ.get('DATABASE_PORT'),  # Доступ к порту
-    },
-}
+os.environ['DJANGO_DISABLE_MIGRATION_CHECKS'] = '1'
 
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_PUBLIC_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 print(os.getenv('DATABASE_URL'))
 
 
