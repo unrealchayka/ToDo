@@ -26,14 +26,18 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.railway.app'
 ]  # Убраны слеши в конце
 
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_DOMAIN = None  # Важно! Не используйте .railway.app для кук
-
 # Сессии
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = 'Lax'
 SESSION_COOKIE_DOMAIN = None  # Аналогично CSRF
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Используем БД для сессий
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# Важно для Railway
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # CORS (если используете API)
 CORS_ALLOWED_ORIGINS = [
@@ -187,6 +191,10 @@ DATABASES = {
         'PASSWORD': os.getenv('PGPASSWORD'),
         'HOST': os.getenv('PGHOST'),
         'PORT': os.getenv('PGPORT'),
+        'OPTIONS': {
+            'connect_timeout': 5,  # Таймаут подключения
+            'sslmode': 'require'   # Обязательно для Railway
+        }
     }
 }
 
