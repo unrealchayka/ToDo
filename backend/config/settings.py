@@ -167,12 +167,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ["PGDATABASE"],
-        "USER": os.environ["PGUSER"],
-        "PASSWORD": os.environ["PGPASSWORD"],
-        "HOST": os.environ["PGHOST"],
-        "PORT": os.environ["PGPORT"],
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("PGDATABASE", "railway"),
+        "USER": os.getenv("PGUSER", "postgres"),
+        "PASSWORD": os.getenv("PGPASSWORD"),
+        "HOST": os.getenv("RAILWAY_TCP_PROXY_DOMAIN"),  # Используем публичный хост
+        "PORT": os.getenv("RAILWAY_TCP_PROXY_PORT"),
         "OPTIONS": {
             "sslmode": "require",  # Обязательно для Railway
             "sslrootcert": os.path.join(BASE_DIR, "prod-ca-2021.crt")  # Если требуется
