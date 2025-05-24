@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -175,17 +176,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('PGDATABASE', 'Postgres'),
-        'USER': os.getenv('PGUSER', 'postgres'),
-        'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('RAILWAY_TCP_PROXY_DOMAIN'),
-        'PORT': os.getenv('RAILWAY_TCP_PROXY_PORT'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-    }
+    'default': dj_database_url.parse(
+        os.getenv('DATABASE_URL'), 
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True
+    )
 }
 
 
