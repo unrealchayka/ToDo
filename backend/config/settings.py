@@ -17,12 +17,12 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 DEBUG = True  # В продакшене всегда False
 ALLOWED_HOSTS = [
     '*'
-    'django-rest-starter-production-f07d.up.railway.app',
+    'todo-production-cc3d.up.railway.app',
     '.railway.app',
 ]  # Убраны лишние символы
 
 # CSRF и куки
-CSRF_TRUSTED_ORIGINS = ['https://django-rest-starter-production-f07d.up.railway.app']  # Убраны слеши в конце
+CSRF_TRUSTED_ORIGINS = ['https://todo-production-cc3d.up.railway.app']  # Убраны слеши в конце
 
 CSRF_COOKIE_DOMAIN = None  # Важно! Не используйте .railway.app для кук
 # Сессии
@@ -39,7 +39,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # CORS (если используете API)
 CORS_ALLOWED_ORIGINS = [
-    'https://django-rest-starter-production-f07d.up.railway.app',
+    'https://todo-production-cc3d.up.railway.app',
     "http://localhost:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
