@@ -16,13 +16,13 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False  # В продакшене всегда False
 ALLOWED_HOSTS = [
-    'todo-production-8dcd.up.railway.app',
+    'django-server-production-7073.up.railway.app',
     '.railway.app',
 ]  # Убраны лишние символы
 
 # CSRF и куки
 CSRF_TRUSTED_ORIGINS = [
-    'https://todo-production-8dcd.up.railway.app',
+    'https://django-server-production-7073.up.railway.app',
     'https://*.railway.app'
 ]  # Убраны слеши в конце
 
@@ -37,7 +37,7 @@ SESSION_COOKIE_DOMAIN = None  # Аналогично CSRF
 
 # CORS (если используете API)
 CORS_ALLOWED_ORIGINS = [
-    'https://todo-production-8dcd.up.railway.app',
+    'https://django-server-production-7073.up.railway.app',
 ]
 CORS_ALLOW_CREDENTIALS = True
 
