@@ -15,10 +15,11 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # В продакшене всегда False
 ALLOWED_HOSTS = [
-    '*'
-    'todo-9efx.onrender.com',
-    '.railway.app',
-]  # Убраны лишние символы
+    'todo-9efx.onrender.com',  # Ваш текущий домен
+    '.onrender.com',           # Все поддомены Render
+    'localhost',
+    '127.0.0.1'
+]
 
 
 STATIC_URL = '/static/'
