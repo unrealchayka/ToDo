@@ -177,15 +177,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'gOcgDxyXRZTFDABNRTgvnSAsExFNtTJb',
-        'HOST': 'postgres-wtut.railway.internal',
-        'PORT': 5432,
+        'NAME': os.getenv('PGDATABASE'),
+        'USER': os.getenv('PGUSER'),
+        'PASSWORD': os.getenv('PGPASSWORD'),
+        'HOST': os.getenv('PGHOST'),
+        'PORT': os.getenv('PGPORT'),
         'OPTIONS': {
-            'connect_timeout': 5,
-            'sslmode': 'require'
-        }
+            'sslmode': 'require',
+        },
     }
 }
 
