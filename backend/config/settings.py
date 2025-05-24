@@ -174,7 +174,7 @@ DATABASES = {
     }
 }
 
-print(os.getenv('DATABASE_URL'))
+print(DATABASES)
 
 
 # Password validation
