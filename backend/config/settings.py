@@ -174,10 +174,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
-DATABASE_URL=os.getenv("DATABASE_URL")
-DATABASES={
-    "default":dj_database_url.config(default=DATABASE_URL,conn_max_age=1800),
-    'OPTIONS': {'sslmode': 'require'}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PGDATABASE', 'railway'),
+        'USER': os.getenv('PGUSER', 'postgres'),
+        'PASSWORD': os.getenv('PGPASSWORD', 'SPWbiyAjXSDBRYEyoaIzRpryJICzISwW'),
+        'HOST': os.getenv('RAILWAY_TCP_PROXY_DOMAIN'),  # Используем публичный хост
+        'PORT': os.getenv('RAILWAY_TCP_PROXY_PORT'),
+        'OPTIONS': {'sslmode': 'require'}
+    }
 }
 
 print(os.getenv('DATABASE_URL'))
