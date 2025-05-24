@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 DEBUG = True  # В продакшене всегда False
 ALLOWED_HOSTS = [
     '*'
-    'todo-production-cc3d.up.railway.app',
+    'todo-9efx.onrender.com',
     '.railway.app',
 ]  # Убраны лишние символы
 
