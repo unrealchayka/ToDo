@@ -16,12 +16,13 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # В продакшене всегда False
 ALLOWED_HOSTS = [
-    'carefree-reflection-production-feae.up.railway.app',
+    '*'
+    'django-rest-starter-production-90de.up.railway.app',
     '.railway.app',
 ]  # Убраны лишние символы
 
 # CSRF и куки
-CSRF_TRUSTED_ORIGINS = ['https://carefree-reflection-production-feae.up.railway.app']  # Убраны слеши в конце
+CSRF_TRUSTED_ORIGINS = ['https://django-rest-starter-production-90de.up.railway.app']  # Убраны слеши в конце
 
 CSRF_COOKIE_DOMAIN = None  # Важно! Не используйте .railway.app для кук
 # Сессии
@@ -38,7 +39,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # CORS (если используете API)
 CORS_ALLOWED_ORIGINS = [
-    'https://carefree-reflection-production-feae.up.railway.app',
+    'https://django-rest-starter-production-90de.up.railway.app',
     "http://localhost:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -164,14 +165,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/data/db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ["PGDATABASE"],
+        "USER": os.environ["PGUSER"],
+        "PASSWORD": os.environ["PGPASSWORD"],
+        "HOST": os.environ["PGHOST"],
+        "PORT": os.environ["PGPORT"],
     }
 }
-
 print(os.getenv('DATABASE_URL'))
 
 
