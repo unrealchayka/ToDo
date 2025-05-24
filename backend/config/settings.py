@@ -31,7 +31,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = [
     "*",  # Для теста (не для продакшена!)
-    "https://django-server-production-f8d3.up.railway.app/",
+    "https://todo-production-8dcd.up.railway.app",
     ".railway.app",
 ]
 
