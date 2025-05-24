@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-#2ek*^umv5z7x)wot&6(34(wzyw3y*mvb&ymhu(%33-mhtf3en
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['https://django-server-production-f8d3.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://todo-production-8dcd.up.railway.app']
 CSRF_COOKIE_DOMAIN = '.railway.app'  # Точечка в начале!
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'Lax'
