@@ -173,6 +173,10 @@ DATABASES = {
         "PASSWORD": os.environ["PGPASSWORD"],
         "HOST": os.environ["PGHOST"],
         "PORT": os.environ["PGPORT"],
+        "OPTIONS": {
+            "sslmode": "require",  # Обязательно для Railway
+            "sslrootcert": os.path.join(BASE_DIR, "prod-ca-2021.crt")  # Если требуется
+        }
     }
 }
 print(os.getenv('DATABASE_URL'))
