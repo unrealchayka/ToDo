@@ -7,7 +7,6 @@ backend/db.sqlite3
 /__pycache__
 backend/static
 backend/staticfiles
-/static
 /staticfiles
 # Next.js
 frontend/.next/

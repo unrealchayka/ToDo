@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
 
-    'todo.apps.TodoConfig',
+    'todo',
 ]
 
 MIDDLEWARE = [
