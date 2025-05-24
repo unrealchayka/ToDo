@@ -177,11 +177,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('PGDATABASE'),
-        'USER': os.getenv('PGUSER'),
+        'NAME': os.getenv('PGDATABASE', 'Postgres'),
+        'USER': os.getenv('PGUSER', 'postgres'),
         'PASSWORD': os.getenv('PGPASSWORD'),
-        'HOST': os.getenv('PGHOST'),
-        'PORT': os.getenv('PGPORT'),
+        'HOST': os.getenv('RAILWAY_TCP_PROXY_DOMAIN'),
+        'PORT': os.getenv('RAILWAY_TCP_PROXY_PORT'),
         'OPTIONS': {
             'sslmode': 'require',
         },
