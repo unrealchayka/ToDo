@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from datetime import timedelta
 from todo.models import Category, TodoTask, Tag, TaskComment, TaskAttachment
-import os
 
 User = get_user_model()
 fake = Faker('ru_RU')
