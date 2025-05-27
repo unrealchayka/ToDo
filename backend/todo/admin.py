@@ -37,8 +37,8 @@ class TaskAttachmentInline(admin.TabularInline):
     readonly_fields = ('uploaded_at',)
 
 class TodoTaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'user', 'category', 'priority', 'completed', 'due_date')
-    list_filter = ('completed', 'priority', 'category', 'user')
+    list_display = ('title', 'category', 'priority', 'completed', 'due_date')
+    list_filter = ('completed', 'priority', 'category')
     search_fields = ('title', 'description')
     date_hierarchy = 'due_date'
     inlines = [TaskCommentInline, TaskAttachmentInline]
@@ -52,8 +52,8 @@ class TodoTaskAdmin(admin.ModelAdmin):
     filter_horizontal = ('tags',)
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug',)
-    search_fields = ('title', 'description')
+    list_display = ('title', 'user', 'slug',)
+    search_fields = ('title', 'user', 'description')
     prepopulated_fields = {'slug' : ('title',)}
 
 class TaskCommentAdmin(admin.ModelAdmin):

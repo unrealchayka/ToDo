@@ -26,7 +26,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Priority(models.TextChoices):
     """Уровни приоритета задачи"""
     LOW = 'low', _('Низкий')
@@ -56,12 +55,7 @@ class TodoTask(models.Model):
         related_name='tasks',
         verbose_name=_("Категория")
     )
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='tasks',
-        verbose_name=_("Пользователь")
-    )
+
     tags = models.ManyToManyField(
         'Tag',
         related_name='tasks',
@@ -160,6 +154,12 @@ class Project(models.Model):
     title = models.CharField(_("Заголовок"), max_length=200)
     description = models.TextField(_("Описание"), blank=True)
     tasks = models.ManyToManyField(TodoTask, blank=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='tasks',
+        verbose_name=_("Пользователь")
+    )
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
     class Meta:
         verbose_name = _("Проект")
