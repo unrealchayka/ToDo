@@ -118,6 +118,8 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Добро пожаловать в админку NOTE Todo!",
     "show_ui_builder": True,
     "navigation_expanded": True,
+    "show_ui_builder": True,
+    "custom_css": "css/admin_fixed.css",
     
     "topmenu_links": [
         {"name": "Главная", "url": "admin:index"},

@@ -1,0 +1,20 @@
+@media (max-width: 1300px) {
+    .btn {
+        transform: scale(0.8);
+        white-space: normal;
+        word-wrap: break-word;
+        padding: 5px 10px;
+    }
+    .navbar-nav {
+        flex-wrap: wrap;
+    }
+    .btn-group{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .breadcrumb{
+        display: none;
+    }
+}
