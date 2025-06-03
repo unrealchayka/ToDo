@@ -3,7 +3,6 @@
 import {
   ArrowUpRight,
   MoreHorizontal,
-  StarOff,
   Trash2,
   Link as IconLink
 } from "lucide-react"
@@ -25,6 +24,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { useState } from "react"
 
 export function NavFavorites({
   favorites,
@@ -36,13 +36,14 @@ export function NavFavorites({
   }[]
 }) {
   const { isMobile } = useSidebar()
-
+  
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden h-[50%] overflow-y-scroll my-scroll">
+      <SidebarGroupLabel className="text-green-500 text-[20px]">Projects</SidebarGroupLabel>
       <SidebarMenu>
-        {favorites.map((item) => (
-          <SidebarMenuItem key={item.name}>
+        {favorites.map((item, index) => (
+          <SidebarMenuItem
+           key={item.name}>
             <SidebarMenuButton asChild>
               <Link href={`/note/project/${item.name}`} title={item.name}>
                 <span>{item.emoji}</span>
@@ -61,11 +62,7 @@ export function NavFavorites({
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
-                <DropdownMenuItem>
-                  <StarOff className="text-muted-foreground" />
-                  <span>Remove from Favorites</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                
                 <DropdownMenuItem>
                   <IconLink className="text-muted-foreground" />
                   <span>Copy Link</span>

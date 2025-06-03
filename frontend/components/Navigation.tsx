@@ -26,7 +26,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-black dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-md font-medium"
+                className="text-black dark:text-gray-300 hover:text-green-500 dark:hover:text-green-500 transition-colors duration-300 text-md font-medium"
               >
                 {item.label}
               </Link>
@@ -40,7 +40,7 @@ export function Navigation() {
           <div className="md:hidden flex items-center">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-green-300 focus:outline-none"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>

@@ -7,18 +7,18 @@ import {
   Blocks,
   Calendar,
   Command,
-  Home,
-  Inbox,
-  MessageCircleQuestion,
-  Search,
-  Settings2,
   Trash2,
+  MessageCircleQuestion,
+  CircleCheckBig,
+  Star,
+  List,
+  ClipboardList,
+  Settings2,
 } from "lucide-react"
 
 import { NavFavorites } from "@/components/nav-favorites"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
-import { NavWorkspaces } from "@/components/nav-workspaces"
 import {
   Sidebar,
   SidebarContent,
@@ -28,48 +28,37 @@ import {
 
 // This is sample data.
 const data = {
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: Command,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
     {
-      title: "ToDay",
-      url: "#",
-      icon: Search,
+      title: "All",
+      url: "",
+      icon: List,
     },
     {
-      title: "Week",
-      url: "#",
-      icon: Home,
-      isActive: true,
+      title: "My Task",
+      url: "my-task",
+      icon: ClipboardList,
     },
     {
-      title: "month",
-      url: "#",
-      icon: Inbox,
+      title: "Favorites",
+      url: "favorites",
+      icon: Star,
+      badge: "10",
+    },
+    {
+      title: "Done",
+      url: "done",
+      icon: CircleCheckBig ,
+      badge: "10",
+    },
+    {
+      title: "Deleted",
+      url: "deleted",
+      icon: Trash2 ,
       badge: "10",
     },
   ],
   navSecondary: [
-    {
-      title: "Tasks",
-      url: "/note",
-      icon: Calendar,
-    },
     {
       title: "Calendar",
       url: "/note/calendar",
@@ -84,11 +73,6 @@ const data = {
       title: "Templates",
       url: "/note/templates",
       icon: Blocks,
-    },
-    {
-      title: "Trash",
-      url: "/note/trash",
-      icon: Trash2,
     },
     {
       title: "Help",
@@ -152,14 +136,14 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar {...props}>
+    <Sidebar {...props} className="border-r border-green-500">
       <SidebarHeader>
-        <Image className="relative top-3 left-3 md:mb-10" src='/note.svg' width={100} height={50} alt="note"/>
-        <h1 className="pl-2 text-[20px]">Tasks :</h1>
+        <Image className="relative m-auto top-2 md:m-0 md:left-3 md:mb-10" src='/note.svg' width={100} height={50} alt="note"/>
+        <h1 className="pl-2 text-[20px] text-green-500 ">Tasks :</h1>
         <NavMain items={data.navMain} /> 
       </SidebarHeader>
-      <SidebarContent>
-        <NavFavorites favorites={data.favorites} />
+      <SidebarContent className="flex flex-col gpa-2 justify-around h-full pr-1">
+        <NavFavorites favorites={data.favorites}/>
         {/* <NavWorkspaces workspaces={data.workspaces} /> */}
         <NavSecondary items={data.navSecondary} />
       </SidebarContent>

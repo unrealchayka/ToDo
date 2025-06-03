@@ -378,6 +378,11 @@ export function DataTableDemo() {
   const table = useReactTable({
     data,
     columns,
+    initialState: {
+    pagination: {
+      pageSize: 20, // Установите желаемое количество элементов на странице
+    },
+  },
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
@@ -395,16 +400,17 @@ export function DataTableDemo() {
   })
 
   return (
-    <div className='w-full'>
+    <div className='w-full h-full'>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter titles..."
+          placeholder="Search"
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
+        {table.getFilteredSelectedRowModel().rows.length > 0 && <Button className='bg-[#ff2020] text-black ml-3'>Delete</Button>}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -483,7 +489,7 @@ export function DataTableDemo() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex-1 flex items-center text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
