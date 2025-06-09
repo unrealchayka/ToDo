@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuAction,
   SidebarMenuButton,
@@ -38,8 +37,7 @@ export function NavFavorites({
   const { isMobile } = useSidebar()
   
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden h-[50%] overflow-y-scroll my-scroll">
-      <SidebarGroupLabel className="text-green-500 text-[20px]">Projects</SidebarGroupLabel>
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden h-full overflow-y-scroll my-scroll border-y border-green-500/30">
       <SidebarMenu>
         {favorites.map((item, index) => (
           <SidebarMenuItem
@@ -80,12 +78,6 @@ export function NavFavorites({
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal />
-            <span>More</span>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

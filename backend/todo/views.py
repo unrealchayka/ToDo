@@ -4,17 +4,20 @@ from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils import timezone
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views import View
 from rest_framework.authtoken.models import Token
 
-from .models import Category, TodoTask, Tag, TaskComment, TaskAttachment
+from .models import Category, Project, ProjectFile, TodoTask, Tag, TaskComment, TaskAttachment
 from .serializers import (
     CategorySerializer,
+    ProjectFileSerializer,
+    ProjectSerializer,
     TodoTaskSerializer,
     TagSerializer,
     TaskCommentSerializer,
-    TaskAttachmentSerializer
+    TaskAttachmentSerializer,
+    NoteSerializer
 )
 from django.contrib.auth import get_user_model
 
@@ -39,6 +42,49 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'slug'
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    @action(detail=True, methods=['post'], url_path='upload-file')
+    def upload_file(self, request, slug=None):
+        project = self.get_object()
+        file_serializer = ProjectFileSerializer(data=request.data, context={'request': request})
+        
+        if file_serializer.is_valid():
+            file_serializer.save(project=project)
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProjectFileViewSet(viewsets.ModelViewSet):
+    queryset = ProjectFile.objects.all()
+    serializer_class = ProjectFileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.queryset.filter(project__user=self.request.user)
+
+    def perform_create(self, serializer):
+        project = get_object_or_404(Project, slug=self.kwargs.get('project_slug'), user=self.request.user)
+        serializer.save(project=project)
+
+class NoteViewSet(viewsets.ModelViewSet):
+    serializer_class = NoteSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'slug']
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
 
 class TagViewSet(viewsets.ModelViewSet):
     serializer_class = TagSerializer

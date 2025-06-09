@@ -2,11 +2,10 @@
 
 import * as React from "react"
 import Image from "next/image"
+import Link from "next/link"
 import {
-  AudioWaveform,
   Blocks,
   Calendar,
-  Command,
   Trash2,
   MessageCircleQuestion,
   CircleCheckBig,
@@ -14,6 +13,7 @@ import {
   List,
   ClipboardList,
   Settings2,
+  MoreHorizontal,
 } from "lucide-react"
 
 import { NavFavorites } from "@/components/nav-favorites"
@@ -131,6 +131,56 @@ const data = {
       url: "#",
       emoji: "✅",
     },
+    {
+      name: "Project Management & Task Tracking 1",
+      url: "#",
+      emoji: "📊",
+    },
+    {
+      name: "Family Recipe Collection & Meal Planning 1",
+      url: "#",
+      emoji: "🍳",
+    },
+    {
+      name: "Fitness Tracker & Workout Routines 1",
+      url: "#",
+      emoji: "💪",
+    },
+    {
+      name: "Book Notes & Reading List 1",
+      url: "#",
+      emoji: "📚",
+    },
+    {
+      name: "Sustainable Gardening Tips & Plant Care 1",
+      url: "#",
+      emoji: "🌱",
+    },
+    {
+      name: "Language Learning Progress & Resources 1",
+      url: "#",
+      emoji: "🗣️",
+    },
+    {
+      name: "Home Renovation Ideas & Budget Tracker 1",
+      url: "#",
+      emoji: "🏠",
+    },
+    {
+      name: "Personal Finance & Investment Portfolio 1",
+      url: "#",
+      emoji: "💰",
+    },
+    {
+      name: "Movie & TV Show Watchlist with Reviews 1",
+      url: "#",
+      emoji: "🎬",
+    },
+    {
+      name: "Daily Habit Tracker & Goal Setting 1",
+      url: "#",
+      emoji: "✅",
+    },
   ]
 }
 
@@ -142,11 +192,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <h1 className="pl-2 text-[20px] text-green-500 ">Tasks :</h1>
         <NavMain items={data.navMain} /> 
       </SidebarHeader>
-      <SidebarContent className="flex flex-col gpa-2 justify-around h-full pr-1">
+      <SidebarContent className="flex flex-col gpa-2 justify-center py-2 border-y-2 border-green-500">
+        <h1 className="pl-2 text-[20px] text-green-500 ">Projects</h1>
         <NavFavorites favorites={data.favorites}/>
         {/* <NavWorkspaces workspaces={data.workspaces} /> */}
-        <NavSecondary items={data.navSecondary} />
+        <Link href="/note/projects" className="flex gap-3 pl-2 cursor-pointer">
+            <MoreHorizontal />
+            <span>More</span>
+        </Link>
       </SidebarContent>
+        <NavSecondary items={data.navSecondary} />
+
       <SidebarRail />
     </Sidebar>
   )

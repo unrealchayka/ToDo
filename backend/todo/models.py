@@ -1,9 +1,26 @@
-# backend/todos/models.py
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+from django.db import models
+from django.utils.text import slugify
+import os
 
 User = get_user_model()
+
+
+class Note(models.Model):
+    title = models.CharField(_("Заголовок"), max_length=200)
+    description = models.TextField(_("Описание"), blank=True)
+    slug = models.SlugField(max_length=200)
+    created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("Заметка")
+        verbose_name_plural = _("заметки")
+
+    def __str__(self):
+        return self.title
 
 class Category(models.Model):
     """Категории для группировки задач"""
@@ -40,6 +57,7 @@ class TodoTask(models.Model):
     completed = models.BooleanField(_("Выполнено"), default=False)
     created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Дата обновления"), auto_now=True)
+    slug = models.SlugField(max_length=200)
     due_date = models.DateTimeField(_("Срок выполнения"), null=True, blank=True)
     priority = models.CharField(
         _("Приоритет"),
@@ -150,20 +168,89 @@ class TaskAttachment(models.Model):
         return f"Вложение {self.file.name} к задаче {self.task.id}"
     
 
+def project_file_upload_to(instance, filename):
+    project_slug = slugify(instance.project.title)
+    return os.path.join('projects', project_slug, 'files', filename)
+
 class Project(models.Model):
     title = models.CharField(_("Заголовок"), max_length=200)
     description = models.TextField(_("Описание"), blank=True)
-    tasks = models.ManyToManyField(TodoTask, blank=True)
+    tasks = models.ManyToManyField(
+        TodoTask,
+        related_name='project',
+        verbose_name=_("Задача")
+    )
     user = models.ForeignKey(
-        User,
+        'auth.User',
         on_delete=models.CASCADE,
-        related_name='tasks',
+        related_name='projects',
         verbose_name=_("Пользователь")
     )
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True)
+    created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("Дата обновления"), auto_now=True)
+
     class Meta:
         verbose_name = _("Проект")
         verbose_name_plural = _("Проекты")
 
     def __str__(self):
-        return f"{self.title}"
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+class ProjectFile(models.Model):
+    FILE_TYPES = (
+        ('image', _("Изображение")),
+        ('document', _("Документ")),
+        ('archive', _("Архив")),
+        ('other', _("Другое")),
+    )
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name='files',
+        verbose_name=_("Проект")
+    )
+    file = models.FileField(
+        _("Файл"),
+        upload_to=project_file_upload_to
+    )
+    file_type = models.CharField(
+        _("Тип файла"),
+        max_length=10,
+        choices=FILE_TYPES,
+        default='other'
+    )
+    name = models.CharField(
+        _("Название файла"),
+        max_length=255,
+        blank=True
+    )
+    uploaded_at = models.DateTimeField(_("Дата загрузки"), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Файл проекта")
+        verbose_name_plural = _("Файлы проекта")
+
+    def __str__(self):
+        return self.name or os.path.basename(self.file.name)
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = os.path.basename(self.file.name)
+        
+        # Автоматически определяем тип файла
+        ext = os.path.splitext(self.file.name)[1].lower()
+        if ext in ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'):
+            self.file_type = 'image'
+        elif ext in ('.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.txt', '.rtf'):
+            self.file_type = 'document'
+        elif ext in ('.zip', '.rar', '.7z', '.tar', '.gz'):
+            self.file_type = 'archive'
+        
+        super().save(*args, **kwargs)

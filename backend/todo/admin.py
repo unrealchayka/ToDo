@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import Category, TodoTask, Tag, TaskComment, TaskAttachment, Project
+from .models import Category, ProjectFile, TodoTask, Tag, TaskComment, TaskAttachment, Project, Note
 from django.utils.html import format_html
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -42,19 +42,27 @@ class TodoTaskAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     date_hierarchy = 'due_date'
     inlines = [TaskCommentInline, TaskAttachmentInline]
-    fieldsets = (
-        (None, {'fields': ('title', 'description', 'user')}),
-        (_('Статус'), {'fields': ('completed', 'priority')}),
-        (_('Детали'), {'fields': ('category', 'tags', 'due_date')}),
-        (_('Даты'), {'fields': ('created_at', 'updated_at')}),
-    )
     readonly_fields = ('created_at', 'updated_at')
+    prepopulated_fields = {'slug' : ('title',)}
     filter_horizontal = ('tags',)
+
+class NoteAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'created_at')
+    search_fields = ('title', 'description')
+    prepopulated_fields = {'slug' : ('title',)}
 
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('title', 'user', 'slug',)
-    search_fields = ('title', 'user', 'description')
-    prepopulated_fields = {'slug' : ('title',)}
+    search_fields = ('title', 'user__username', 'description')
+    prepopulated_fields = {'slug': ('title',)}
+    list_select_related = ('user',)
+
+class ProjectFileAdmin(admin.ModelAdmin):
+    list_display = ('name', 'project', 'file_type', 'uploaded_at')
+    search_fields = ('name', 'project__title')
+    list_filter = ('file_type', 'uploaded_at')
+    raw_id_fields = ('project',)
+    readonly_fields = ('uploaded_at',)
 
 class TaskCommentAdmin(admin.ModelAdmin):
     list_display = ('task', 'author', 'created_at', 'short_text')
@@ -72,8 +80,11 @@ class TaskAttachmentAdmin(admin.ModelAdmin):
     search_fields = ('task__title', 'file')
 
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Note, NoteAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(ProjectFile, ProjectFileAdmin)
+
 admin.site.register(TodoTask, TodoTaskAdmin)
 admin.site.register(TaskComment, TaskCommentAdmin)
 admin.site.register(TaskAttachment, TaskAttachmentAdmin)

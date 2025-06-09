@@ -24,6 +24,8 @@ frontend/out/
 !.yarn/releases
 !.yarn/versions
 
+backend/media
+
 # testing
 /coverage
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, TodoTask, Tag, TaskComment, TaskAttachment
+from .models import Category, Project, ProjectFile, TodoTask, Tag, TaskComment, TaskAttachment, Note
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -34,6 +34,13 @@ class TaskCommentSerializer(serializers.ModelSerializer):
         model = TaskComment
         fields = ['id', 'author', 'text', 'created_at', 'updated_at']
         read_only_fields = ['author', 'created_at', 'updated_at']
+
+
+class NoteSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Note
+        fields = '__all__'
 
 class TodoTaskSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
@@ -81,3 +88,27 @@ class TodoTaskCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoTask
         fields = ['title', 'description', 'due_date', 'priority', 'category', 'tags']
+
+class ProjectFileSerializer(serializers.ModelSerializer):
+    file_url = serializers.SerializerMethodField()
+    file_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = ProjectFile
+        fields = ['id', 'name', 'file', 'file_url', 'file_name', 'file_type', 'uploaded_at']
+        read_only_fields = ['file_type', 'uploaded_at']
+
+    def get_file_url(self, obj):
+        return obj.file.url if obj.file else None
+
+    def get_file_name(self, obj):
+        return obj.file.name.split('/')[-1] if obj.file else None
+
+class ProjectSerializer(serializers.ModelSerializer):
+    files = ProjectFileSerializer(many=True, read_only=True)
+    user = serializers.StringRelatedField()
+
+    class Meta:
+        model = Project
+        fields = ['id', 'title', 'slug', 'description', 'user', 'created_at', 'updated_at', 'files']
+        read_only_fields = ['slug', 'created_at', 'updated_at', 'user']
