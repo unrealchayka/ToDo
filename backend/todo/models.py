@@ -104,7 +104,7 @@ class Tag(models.Model):
         related_name='tags',
         verbose_name=_("Пользователь")
     )
-
+ 
     class Meta:
         verbose_name = _("Тег")
         verbose_name_plural = _("Теги")
