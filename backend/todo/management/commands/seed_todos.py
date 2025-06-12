@@ -5,7 +5,8 @@ from faker import Faker
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from datetime import timedelta
-from todo.models import Category, TodoTask, Tag, TaskComment, TaskAttachment, Project, Note
+from django.utils.text import slugify
+from todo.models import Category, TodoTask, Tag, TaskComment, TaskAttachment, Project, ProjectFile, Note
 
 User = get_user_model()
 fake = Faker('ru_RU')
@@ -68,12 +69,26 @@ class Command(BaseCommand):
         # Создаем проекты
         projects = []
         for i in range(5):
+            title = fake.sentence(nb_words=3)
             project = Project.objects.create(
-                title=fake.sentence(nb_words=3),
+                title=title,
+                user=admin_user,
                 description=fake.paragraph(nb_sentences=2),
-                slug=fake.unique.slug(),
-                user=admin_user
             )
+            
+            # Генерируем уникальный slug на основе title + id
+            project.slug = f"{slugify(title)}-{project.id}"
+            project.save()
+            
+            # Создаем файлы для проекта
+            for _ in range(random.randint(1, 3)):
+                file_ext = random.choice(['.jpg', '.png', '.pdf', '.docx', '.xlsx'])
+                project_file = ProjectFile.objects.create(
+                    project=project,
+                    file=f'sample_file_{project.id}_{random.randint(1,100)}{file_ext}',
+                    name=fake.file_name(extension=file_ext[1:])
+                )
+            
             projects.append(project)
             self.stdout.write(self.style.SUCCESS(f'Создан проект: {project.title}'))
 
@@ -86,10 +101,11 @@ class Command(BaseCommand):
                 title=fake.sentence(nb_words=random.randint(2, 5)),
                 description=fake.paragraph(nb_sentences=random.randint(1, 4)),
                 completed=random.choice([True, False]),
+                user=admin_user,
                 due_date=due_date,
                 priority=random.choice(['low', 'medium', 'high']),
                 category=random.choice(categories) if random.choice([True, False]) else None,
-                slug=fake.unique.slug()
+                project=random.choice(projects) if random.choice([True, False]) else None,
             )
             tasks.append(task)
             
@@ -105,11 +121,12 @@ class Command(BaseCommand):
                     author=admin_user,
                     text=fake.paragraph(nb_sentences=random.randint(1, 3)))
             
-            # Создаем вложения (примеры)
+            # Создаем вложения
             if random.choice([True, False]):
                 attachment = TaskAttachment.objects.create(
                     task=task,
-                    uploaded_by=admin_user
+                    uploaded_by=admin_user,
+                    file=f'sample_attachment_{task.id}.pdf'
                 )
                 self.stdout.write(self.style.SUCCESS(f'Создано вложение для задачи {task.id}'))
             
@@ -121,17 +138,10 @@ class Command(BaseCommand):
             note = Note.objects.create(
                 title=fake.sentence(nb_words=random.randint(2, 5)),
                 description=fake.paragraph(nb_sentences=random.randint(2, 6)),
-                slug=fake.unique.slug(),
                 user=admin_user
             )
             notes.append(note)
             self.stdout.write(self.style.SUCCESS(f'Создана заметка #{i+1}: {note.title}'))
-
-        # Добавляем задачи в проекты
-        for project in projects:
-            project_tasks = random.sample(tasks, min(10, len(tasks)))
-            project.tasks.set(project_tasks)
-            self.stdout.write(self.style.SUCCESS(f'Добавлено {len(project_tasks)} задач в проект {project.title}'))
 
         self.stdout.write(self.style.SUCCESS('Успешно сгенерированы фейковые данные!'))
         self.stdout.write(self.style.SUCCESS(f'Всего создано:'))
@@ -139,5 +149,8 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f'- Категорий: {len(categories)}'))
         self.stdout.write(self.style.SUCCESS(f'- Тегов: {len(tags)}'))
         self.stdout.write(self.style.SUCCESS(f'- Проектов: {len(projects)}'))
+        self.stdout.write(self.style.SUCCESS(f'- Файлов проектов: {ProjectFile.objects.count()}'))
         self.stdout.write(self.style.SUCCESS(f'- Задач: {len(tasks)}'))
+        self.stdout.write(self.style.SUCCESS(f'- Комментариев: {TaskComment.objects.count()}'))
+        self.stdout.write(self.style.SUCCESS(f'- Вложений: {TaskAttachment.objects.count()}'))
         self.stdout.write(self.style.SUCCESS(f'- Заметок: {len(notes)}'))

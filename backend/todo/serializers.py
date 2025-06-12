@@ -106,9 +106,10 @@ class ProjectFileSerializer(serializers.ModelSerializer):
 
 class ProjectSerializer(serializers.ModelSerializer):
     files = ProjectFileSerializer(many=True, read_only=True)
+    tasks = TodoTaskSerializer(many=True)
     user = serializers.StringRelatedField()
 
     class Meta:
         model = Project
-        fields = ['id', 'title', 'slug', 'description', 'user', 'created_at', 'updated_at', 'files']
+        fields = ['id', 'title', 'slug', 'description', 'user', 'created_at', 'updated_at', 'tasks', 'files']
         read_only_fields = ['slug', 'created_at', 'updated_at', 'user']

@@ -37,7 +37,7 @@ class TaskAttachmentInline(admin.TabularInline):
     readonly_fields = ('uploaded_at',)
 
 class TodoTaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'priority', 'completed', 'due_date')
+    list_display = ('title', 'user', 'project', 'category', 'priority', 'completed', 'due_date')
     list_filter = ('completed', 'priority', 'category')
     search_fields = ('title', 'description')
     date_hierarchy = 'due_date'

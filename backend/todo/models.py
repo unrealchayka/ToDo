@@ -54,6 +54,8 @@ class TodoTask(models.Model):
     """Основная модель задачи"""
     title = models.CharField(_("Заголовок"), max_length=200)
     description = models.TextField(_("Описание"), blank=True)
+    project = models.ForeignKey('Project', related_name='tasks', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     completed = models.BooleanField(_("Выполнено"), default=False)
     created_at = models.DateTimeField(_("Дата создания"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Дата обновления"), auto_now=True)
@@ -175,13 +177,9 @@ def project_file_upload_to(instance, filename):
 class Project(models.Model):
     title = models.CharField(_("Заголовок"), max_length=200)
     description = models.TextField(_("Описание"), blank=True)
-    tasks = models.ManyToManyField(
-        TodoTask,
-        related_name='project',
-        verbose_name=_("Задача")
-    )
+    
     user = models.ForeignKey(
-        'auth.User',
+        User,
         on_delete=models.CASCADE,
         related_name='projects',
         verbose_name=_("Пользователь")
