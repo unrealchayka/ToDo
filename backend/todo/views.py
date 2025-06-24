@@ -1,3 +1,4 @@
+import requests
 from rest_framework import viewsets, permissions, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -7,6 +8,12 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 from django.views import View
 from rest_framework.authtoken.models import Token
+from rest_framework.reverse import reverse
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from collections import OrderedDict
+from rest_framework.permissions import AllowAny
 
 from .models import Category, Project, ProjectFile, TodoTask, Tag, TaskComment, TaskAttachment
 from .serializers import (
@@ -23,12 +30,51 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+class AllAPIUrlsView(APIView):
+    permission_classes = [AllowAny]
+    
+    def get(self, request, format=None):
+        urls = OrderedDict()
+        
+        main_urls = {
+            'categories': reverse('category-list', request=request),
+            'tags': reverse('tag-list', request=request),
+            'tasks': reverse('task-list', request=request),
+            'comments': reverse('comment-list', request=request),
+            'attachments': reverse('attachment-list', request=request),
+            'projects': reverse('project-list', request=request),
+        }
+        urls.update(main_urls)
+        
+        project_urls = {
+            'project_files': reverse(
+                'project-file-list', 
+                kwargs={'project_slug': 'sample'}, 
+                request=request
+            ).replace('sample', '{project_slug}')
+        }
+        urls.update(project_urls)
+        
+        return Response(urls)
+
 class HomeView(View):
     def get(self, request):
         context = {}
         if request.user.is_authenticated:
             token, created = Token.objects.get_or_create(user=request.user)
             context['api_token'] = token.key
+
+        api_url = request.build_absolute_uri(reverse('all-api-urls'))
+        response = requests.get(api_url)
+
+        if response.status_code == 200:
+            api_urls = response.json()
+        else:
+            api_urls = {
+                'error': 'Не удалось загрузить список API URLs'
+            }
+
+        context['api_urls'] = api_urls
         return render(request, 'index.html', context)
 
 class CategoryViewSet(viewsets.ModelViewSet):

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, ProjectFileViewSet, ProjectViewSet, TagViewSet, TodoTaskViewSet, TaskCommentViewSet, TaskAttachmentViewSet, HomeView
+from .views import CategoryViewSet, ProjectFileViewSet, AllAPIUrlsView, ProjectViewSet, TagViewSet, TodoTaskViewSet, TaskCommentViewSet, TaskAttachmentViewSet, HomeView
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet, basename='category')
@@ -17,4 +17,5 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('api/', include(router.urls)),
     path('projects/<slug:project_slug>/', include(projects_router.urls)),
+    path('api/all-urls/', AllAPIUrlsView.as_view(), name='all-api-urls'), 
 ]

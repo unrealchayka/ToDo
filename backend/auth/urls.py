@@ -1,14 +1,13 @@
-from django.urls import path, include
-from .views import RegisterView
+from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-from .serializers import CustomTokenObtainPairSerializer
+from .views import RegisterView
+
 
 
 urlpatterns = [
-    path('', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('login/', TokenObtainPairView.as_view(), name='login'),
+    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    path('token/', TokenObtainPairView.as_view(serializer_class=CustomTokenObtainPairSerializer), name='token_obtain_pair'),
 ]
